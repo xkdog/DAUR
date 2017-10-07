@@ -1,6 +1,6 @@
 # DAUR
 
-Data Analysis Using R for Social and Behavioral Sciences
+DAUR: *Data Analysis Using R for Social and Behavioral Sciences*
 
 This repo was built for my ongoing project of publishing an introductory Chinese textbook titled *Data Analysis Using R for Social and Behavioral Sciences*. I'm not familiar with the [Bookdown](https://bookdown.org/) style yet. Once I figure it out, I will put all the materials into a bookdown repo.
 
@@ -24,7 +24,7 @@ This repo was built for my ongoing project of publishing an introductory Chinese
 - 原文
     - 如果是 Mac 系统，可使用 [Sublime](https://www.sublimetext.com/) 软件或其他开源的文本编辑器打开。
 - 修改为（比原文少了两个汉字）
-    - ~~如果~~若是 Mac 系统，可使用 [Sublime](https://www.sublimetext.com/) 软件或其他~~的~~开源文本编辑器打开。
+    - 若~~如果~~是 Mac 系统，可使用 [Sublime](https://www.sublimetext.com/) 软件或其他~~的~~开源文本编辑器打开。
 
 
 ## 撰写语法
