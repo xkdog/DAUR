@@ -196,7 +196,7 @@ Sys.setenv(LANG = "en")
 这种做法的劣势在于关闭 R 而重新打开后，其默认语言选项仍是中文。严格来说，这并不是 R 本身的设置，而是它默认采用 Windows 系统的默认语言。对于大陆人士而言，其所使用的 Windows 操作系统通常默认语言为中文，因此 R 会使用中文提示。为一劳永逸地改变此版本下的 R 的默认语言，可采用如下方式：
 
 1. 找到安装路径下`etc`文件夹中的`Rconsole`文件。如选择默认安装方式，R 通常安装在 C 盘的 Program Files 目录下。以本人写作此文档时的 R 版本为例，其路径为：`C:\Program Files\R\R-3.3.3\etc`。
-2. 用文本编辑器打开`Rconsole`文件。建议安装[ Notepad++ 软件](https://notepad-plus-plus.org/)而不是使用 Windows 自带的记事本软件打开^[Notepad++ 也是一个免费的自由开源软件。之所以推荐使用它而不是Windows自带的记事本，原因比较复杂，涉及计算机的字符编码问题，暂不必深究。仅了解一点即好：如有可能，Windows 平台下尽可能使用 Notepad++ 而不是其自带的记事本软件创建或修改文本文件。如果是 Mac 系统，可使用 [Sublime](https://www.sublimetext.com/) 软件或其他开源的文本编辑器打开。]。找到以下文字：
+2. 用文本编辑器打开`Rconsole`文件。建议安装[ Notepad++](https://notepad-plus-plus.org/) 软件而不是使用 Windows 自带的记事本软件打开^[Notepad++ 也是一个免费的自由开源软件。之所以推荐使用它而不是Windows自带的记事本，原因比较复杂，涉及计算机的字符编码问题，暂不必深究。仅了解一点即好：如有可能，Windows 平台下尽可能使用 Notepad++ 而不是其自带的记事本软件创建或修改文本文件。如果是 Mac 系统，可使用 [Sublime](https://www.sublimetext.com/) 软件或其他开源文本编辑器打开。]。找到以下文字：
 ```r
 ## Language for messages
 language = 
