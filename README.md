@@ -13,4 +13,9 @@ This repo was built for my ongoing project of publishing an introductory Chinese
 - 所有的 R 命令，行内的应放在\`\`中，如`?mtcars`；行间的应放在\`\`\` 和 \`\`\`中。
 - 所有图片的命名，应当以`pic-`开头，并附以能够代表图片实质内容的英文缩写，然后保存为`png`格式。
 - 撰写者应充分熟悉[**tidyverse**风格](http://style.tidyverse.org/)。
+- 未尽事宜，请联系xkdog@126.com。
 
+
+吕小康
+
+南开大学周恩来政府管理学院
