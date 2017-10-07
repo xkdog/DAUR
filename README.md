@@ -13,9 +13,9 @@ This repo was built for my ongoing project of publishing an introductory Chinese
 只有一条原则：简洁。遵循所谓的奥卡姆剃刀原则：如无必要，务增实体。翻译一下：不要多写一个字。比如
 
 - 原文
-  - “在不知道任何 R 命令的情况下，你也可将 R 作为一个高级的科学计算器使用。”
+    - “在不知道任何 R 命令的情况下，你也可将 R 作为一个高级的科学计算器使用。”
 - 修改为（删去“你”字，完全不影响内容；如此，能删则删）
-  - “在不知道任何 R 命令的情况下，~~你~~也可将 R 作为一个高级的科学计算器使用。”
+    - “在不知道任何 R 命令的情况下，~~你~~也可将 R 作为一个高级的科学计算器使用。”
 
 
 
@@ -26,6 +26,7 @@ This repo was built for my ongoing project of publishing an introductory Chinese
 - 所有的 R 命令，行内的应放在\`\`中，如`?mtcars`；行间的应放在\`\`\` 和 \`\`\`中。
 - 所有图片的命名，应当以`pic-`开头，并附以能够代表图片实质内容的英文缩写，然后保存为`png`格式。
 - 撰写者应充分熟悉[**tidyverse**风格](http://style.tidyverse.org/)。
+- 撰写者必须使用 Markdown 语法进行写作。
 - 未尽事宜，请联系xkdog@126.com。
 
 
