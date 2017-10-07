@@ -1,21 +1,25 @@
 
 # 软件准备
 
-本节主要介绍 R 与 RStudio 的基础知识、安装方式与相关资源。这里所有的示例均以 Windows 10 系统下的 R 3.4.2 版本为例进行，适用于任何 R 3.0.0 以上版本。RStudio 说明适用于 RStudio 1.0 以上版本。
+本节主要介绍 R 与 RStudio 的基础知识、安装方式与相关资源。这里所有的示例均以 Windows 10 系统下的 R 3.4.2 版本为例进行，适用于任何 R 3.0.0 以上版本。RStudio 的说明适用于 RStudio 1.0 以上版本。
 
 ## R 安装与设置
 
 
 ### R 简介
 
-R 是一个免费自由且跨平台通用的统计计算与绘图软件，它有 Windows、Mac、Linux 等版本，均可免费下载使用。R 项目（The R Project for Statistical Computing）最早由新西兰奥克兰大学（Auckland University）的 Robert Gentleman（1959-） 和 Ross Ihaka（1954-） 开发，故软件取两人名字的首字母命名为 R 。该项目始于1993年，2000年发布了首个官方版本 R 1.0.0 ，后期维护由 R 核心团队[（R Core Team）](https://www.r-project.org/contributors.html)负责。截止2017年10月，已发布到 3.4.2 版本。凭借其开源、免费、自由等开放式理念，R 迅速流行，目前已成为学术研究和商业应用领域最为常用的数据分析软件之一。
+R 是一个免费自由且跨平台通用的统计计算与绘图软件，它有 Windows、Mac、Linux 等版本，均可免费下载使用。R 项目（The R Project for Statistical Computing）最早由新西兰奥克兰大学（Auckland University）的 Robert Gentleman（1959-） 和 Ross Ihaka（1954-） 开发，故软件取两人名字的首字母命名为 R 。该项目始于1993年，2000年发布了首个官方版本 R 1.0.0 ，后期维护由 R 核心团队（[R Core Team](https://www.r-project.org/contributors.html)）负责。截止2017年10月，已发布到 3.4.2 版本。凭借其开源、免费、自由等开放式理念，R 迅速获得流行，目前已成为学术研究和商业应用领域最为常用的数据分析软件之一。
 
-从[ R 主页](https://www.r-project.org/)中选择[ download R ](https://cran.r-project.org/mirrors.html)链接可下载到对应操作系统的 R 安装程序。打开链接后的网页会提示选择相应的[ CRAN ](https://cran.r-project.org/mirrors.html) ^[CRAN 是 Comprehensive R Archive Network（R综合典藏网）的简称，它替代 R 核心开发者提供的主程序、源代码和说明文件，也收录其他用户撰写的软件包。]镜像站 ^[镜像站（mirror sites）是网站的复制版本，将网站中的部分网页按原来的结构复制出来，即所谓“镜像”；再将这些镜像放置于具有独立网址的服务器中，以便缓解主站服务器的流量负荷，从而提升访问速率或作为备选网站在主站服务器出现意外时提供正常访问功能。]。目前全球有超过一百个 CRAN 镜像站 ，用户可选择就近下载。Windows 平台下也可直接点击此链接 <http://cran.r-project.org/bin/windows/base/release.htm> 直接下载最新版的 R 进行安装。
+从[ R 主页](https://www.r-project.org/)中选择[ download R ](https://cran.r-project.org/mirrors.html)链接可下载到对应操作系统的 R 安装程序。打开链接后的网页会提示选择相应的[ CRAN ](https://cran.r-project.org/mirrors.html) ^[CRAN 是 Comprehensive R Archive Network（R综合典藏网）的简称，它替代 R 核心开发者提供的主程序、源代码和说明文件，也收录其他用户撰写的软件包。]镜像站 ^[镜像站（mirror sites）是网站的复制版本，将网站中的部分网页按原来的结构复制出来，即所谓“镜像”；再将这些镜像放置于具有独立网址的服务器中，以便缓解主站服务器的流量负荷，从而提升访问速率或作为备选网站在主站服务器出现意外时提供正常访问功能。]。目前全球有超过一百个 CRAN 镜像站 ，用户可选择就近下载。Windows 平台下也可直接点击如下链接
+
+<http://cran.r-project.org/bin/windows/base/release.htm> 
+
+直接下载最新版的 R 进行安装。
 
 
 ### R 的安装与初步尝试
 
-程序下载完毕后，双击安装程序、选择对应的32位或64位程序（若不明白这其中的区别，可选择同时安装）即可安装。初学者可按默认设置安装在系统盘，并选择一切默认设定完成安装程序。高级用户可参考[谢益辉](https://yihui.name/)等人的[安装经验](https://bookdown.org/yihui/r-ninja/setup.html#r)进行相关设置，如安装时去掉版本号以便于日后更新 R 包。初学者可先略过某些技术细节，将注意力集中于数据分析本身。
+程序下载完毕后，双击安装程序、选择对应的32位或64位程序（若不明白这其中的区别，可选择同时安装）即可安装。初学者可按默认设置安装在系统盘，并选择一切默认设定完成安装程序。高级用户可参考[谢益辉](https://yihui.name/)等人的[安装经验](https://bookdown.org/yihui/r-ninja/setup.html#r)进行相关设置，如安装时去掉版本号以便于日后更新 R 包。
 
 
 安装完毕后，打开 R ，可看到 R 的操作界面，称为 R 控制台（R Console）。类似其他以编程语言为主要工作方式的软件，R 的界面简洁而朴素，类似一个空白的写字板。但在这一朴素的外表下，是丰富而复杂的运算功能。
@@ -41,7 +45,7 @@ head(mtcars, 5)
 
 相信你很快就能猜出`tail(mtcars, 5)`是何功能。
 
-需要强调的是，在 R 的命令中所使用的符号全部为英文符号。
+需要强调的是，在 R 的命令中所使用的符号全部为英文符号，如果出现中文标点则会出错。
  
 ## R 包安装与加载
 
@@ -58,7 +62,7 @@ R 与 RStudio 都可以安装 R 包，区别在于：在 R 控制台安装 R 包
 ```r
 install.packages("dplyr")
 ```
-确保电脑联网，选择镜像后点击确定即可在线安装软件包`dplyr`。其中的双引号`""`也可使用单引号`''`替换。安装成功后应出现如下提示：
+确保电脑联网。每次打开 R 后，首次安装包时会要求选择镜像站。就近选择国内镜像，如常见的清华大学镜像站、中国科学技术大学镜像站、兰州大学镜像站等，点击确定即可在线安装软件包**dplyr**。其中的双引号`""`也可使用单引号`''`替换。安装成功后应出现如下提示：
 ```r
 package ‘dplyr’ successfully unpacked and MD5 sums checked
 ```
@@ -94,9 +98,9 @@ install.packages(c("ggplot2", "dplyr", "tidyr", "stringr", "lubridate", "readr",
 
 存放于 CRAN 上的包通常是较为成熟、某种程度上讲也是相对滞后的包。包在维护和更新过程中会增加一些新的功能，或者总会有一些新的试验性的包出现，以满足用户的功能。这些旧包的更新版、或者是未曾公开推出的新包，通常会以开发版（development version）的形式储存于类似[ GitHub ](https://github.com)这样的代码托管平台 ^[GitHub 是一个面向开源及私有软件项目的托管平台，于2008年4月10日正式上线，是目前全球规模最大的社会化编程及代码托管网站。]，而并未提交到 CRAN 。甚至有开发者本人并无意向将自身开发的 R 包提交至 CRAN 镜像。此时，前述两种安装方式就不再有效。
 
-若想直接从 GitHub 安装相关包，建议通过 Hadley 开发的`devtools`包完成安装。以下是基本步骤：
+若想直接从 GitHub 安装相关包，建议通过 Hadley 开发的**devtools**包完成安装。以下是基本步骤：
 
-1. 安装`devtools`包（请复习并实践第一种安装法）。
+1. 安装**devtools**包（请复习并实践第一种安装法）。
 2. 加载该包，即输入`library(devtools)`。
 3. 使用其中的`install_github()`函数完成安装。
 
@@ -106,18 +110,21 @@ install.packages("devtools")
 library(devtools)
 install_github("hadlley/dplyr")
 ```
-`install_github()`命令要求先给出开发者名字再给出包名。这对于只知道包名而不知道开发者名字的用户是不利的。好在使用这一安装方式的通常为中高级用户，他们自可从 GitHub 页面找到相关包并阅读其安装说明后安装。
+`install_github()`命令通常要求先给出开发者名字再给出包名。这对于只知道包名而不知道开发者名字的用户是不利的。好在使用这一安装方式的通常为中高级用户，他们自可从 GitHub 页面找到相关包并阅读其安装说明后安装。
 
 为更好地利用 GitHub 及 R 的相关功能，同时建议 Windows 用户安装[`Rtools`工具](https://cran.r-project.org/bin/windows/Rtools/)。这是用于在 Windows 平台下开发 R 包和 R 本身的软件插件。
 
-若安装了 R 包后仍然出现是否要进行安装的界面，可重新打开一次 R 再进行操作。在内存允许的情况下，也可以同时打开多个 R 和 RStudio 。
+若安装了 R 包后仍然出现是否要进行安装的界面，可重新打开一次 R 重新安装。若内存允许，也可以同时打开多个 R，它们之间的运行相互不干扰。
 
 ### R 包加载
 
-使用 R 基础安装包中的函数进行数据分析时，直接调用函数即可，无需先加载这些包。
+使用 R 基础安装包中的**base**这个包中的函数进行数据分析时，直接调用函数即可，无需先加载。**base**包所包含的函数可使用如下命令查看
+```r
+help(package = "base")
+```
 
 
-若要引入附加包中的函数进行数据分析，首先要加载这些包。这有两种方式。
+若要引入其他包的函数进行数据分析，首先要加载这些包。这有两种方式。
 
 一是使用加载命令`library()`，此时包的名称不需要加引号。例如：
 ```r
@@ -224,4 +231,6 @@ Type 'q()' to quit R.
 [Previously saved workspace restored]
 ```
 
-使用 R ，即意味着基本告别中文操作与提示。请尽快转向并熟练英文环境下的相关操作，这对提升 R 的使用效率至关重要。
+实际上，对于有经验的Windows用户来说，设置默认语言为英文的最简便方式是，在安装 R 时，出现`Select Components`对话框时，将里面出现的`Message Translation`选项前面默认出现的勾去掉，即可保证界面和提示语言为英文。你不妨在安装新版本的 R 时尝试这种方法。
+
+最后提醒：使用 R ，即意味着基本告别中文操作与提示。请尽快熟练英文环境下的相关操作，这对提升 R 的使用效率至为关键。
