@@ -12,7 +12,7 @@ RStudio 可从其[官网](https://www.rstudio.com/products/RStudio/)选择对应
 
 ### RStudio 调试
 
-此处应增加以下内容：
+**To 翟春晖：此处应增加以下内容：**
 
 - RStudio四个窗口的布局与功能，要有截图，命名为pic-rstudio-overview.png
 - RStudio新建文档的类型，要有截图，命名为pic-rstudio-newfile.png
