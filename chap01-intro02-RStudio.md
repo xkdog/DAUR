@@ -31,7 +31,7 @@ View(mtcars)
 
 此时左上方窗口会出现数据结构示意，并可执行数据排序（点击变量名称中的上下箭头按钮）、筛选（点沙漏形状的 Fitler 按钮）等简单功能。
 
-![](rstudio_viewmtcars.png)
+![](pic-rstudio_viewmtcars.png)
 
 ### RStudio 中的常用快捷键
 
