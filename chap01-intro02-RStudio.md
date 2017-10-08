@@ -12,6 +12,16 @@ RStudio 可从其[官网](https://www.rstudio.com/products/RStudio/)选择对应
 
 ### RStudio 调试
 
+此处应增加以下内容：
+
+- RStudio四个窗口的布局与功能，要有截图，命名为pic-rstudio-overview.png
+- RStudio新建文档的类型，要有截图，命名为pic-rstudio-newfile.png
+- RStudio中`File --> Import Dataset`的功能与截图，命名为pic-rstudio-importdata.png
+- RStudio中`Tools --> Check For Updates`的功能与截图，命名为pic-rstudio-update-package.png
+- RStudio中`Tools --> Global Options --> Code --> Saving`下，Default text coding应选择为UTF-8，要有截图，命名为pic-rstudio-defalult-coding.png
+- RStudio中`Help --> Cheatsheet (翻译为速查表) `的功能，以及`Help --> Markdown Quick Reference`的功能
+- 其他你觉得重要的内容，要多百度下RStudio简介，以及相关的英文文档。研究透RStudio后，随时补充更新这一内容。
+ 
 对初级用户而言，RStudio 的最初调试只涉及 Tools 菜单下的 Global Options 子菜单。（（**此处应插入一个光标停留Global Options路径下的截图，命名为pic-rstudio-global.png**））打开后，在 General 选项中可选择与 RStudio 相关联的 R 版本（如果只安装了一个版本的 R，此步骤可忽略），还可设定当前工作目录（working directory）。（（**此处应插入一个停留General路径下的截图，命名为pic-rstudio-general.png**））当前工作目录的设置非常重要，稍后继续说明。在 Appearance 选项中可选择字体、字号和背景颜色，可自行尝试调整到个人觉得舒适的配置。（**此处应插入一个停留Appearance路径下的截图，命名为pic-rstudio-appearance.png**）
 
 **截图应只保留RStudio背景，不要露出Windows背景，保存为png格式，上传该截图文件至DAUR这个repo，在正文中写入类似`![](pic-rstudio_viewmtcars.png)
