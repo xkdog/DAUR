@@ -152,7 +152,7 @@ The following objects are masked from ‘package:base’:
 dplyr::sample_n(mtcars, 2)
 ```
 
-上述命令表示，使用`dplyr`包中的`sample_n()`函数，从`mtcars`数据中任取两行。
+上述命令表示，使用**dplyr**包中的`sample_n()`函数，从`mtcars`数据中任取两行。
 
 退出 R 时无需先“退出”包再退出 R ，保存数据对象后直接关闭 R 即可。
 
