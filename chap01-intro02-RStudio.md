@@ -10,7 +10,12 @@ RStudio 的[核心团队](https://www.rstudio.com/about/)包括以首席科学�
 
 RStudio 可从其[官网](https://www.rstudio.com/products/RStudio/)选择对应系统的版本下载安装。安装选择默认选项即可，注意一般应在安装完 R 后再安装 RStudio。
 
-对初级用户而言，RStudio 的最初调试只涉及 Tools 菜单下的 Global Options 子菜单。打开后，在 General 选项中可选择与 RStudio 相关联的 R 版本（如果只安装了一个版本的 R，此步骤可忽略），还可设定当前工作目录（working directory）。当前工作目录的设置非常重要，稍后继续说明。在 Appearance 选项中可选择字体、字号和背景颜色，可自行尝试调整到个人觉得舒适的配置。
+### RStudio 调试
+
+对初级用户而言，RStudio 的最初调试只涉及 Tools 菜单下的 Global Options 子菜单。（（**此处应插入一个光标停留Global Options路径下的截图，命名为pic-RStudio-Global.png**））打开后，在 General 选项中可选择与 RStudio 相关联的 R 版本（如果只安装了一个版本的 R，此步骤可忽略），还可设定当前工作目录（working directory）。（（**此处应插入一个停留General路径下的截图，命名为pic-RStudio-General.png**））当前工作目录的设置非常重要，稍后继续说明。在 Appearance 选项中可选择字体、字号和背景颜色，可自行尝试调整到个人觉得舒适的配置。（**此处应插入一个停留Appearance路径下的截图，命名为pic-RStudio-Appearance.png**）
+
+**截图应只保留RStudio背景，不要露出Windows背景，保存为png格式，上传该截图文件至DAUR这个repo，在正文中写入类似`![](pic-rstudio_viewmtcars.png)
+`的文字，提交更新后即可看到图片。上传后，删除上面的说明文字。**
 
 ### RStudio 功能简介
 
