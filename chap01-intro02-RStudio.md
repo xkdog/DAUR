@@ -12,20 +12,60 @@ RStudio 可从其[官网](https://www.rstudio.com/products/RStudio/)选择对应
 
 ### RStudio 调试
 
-**To 翟春晖：此处应增加以下内容：**
+#### 布局与功能
 
-- RStudio四个窗口的布局与功能，要有截图，命名为pic-rstudio-overview.png
-- RStudio新建文档的类型，要有截图，命名为pic-rstudio-newfile.png
-- RStudio中`File --> Import Dataset`的功能与截图，命名为pic-rstudio-importdata.png
-- RStudio中`Tools --> Check For Updates`的功能与截图，命名为pic-rstudio-update-package.png
-- RStudio中`Tools --> Global Options --> Code --> Saving`下，Default text coding应选择为UTF-8，要有截图，命名为pic-rstudio-defalult-coding.png
-- RStudio中`Help --> Cheatsheet (翻译为速查表) `的功能，以及`Help --> Markdown Quick Reference`的功能
-- 其他你觉得重要的内容，要多百度下RStudio简介，以及相关的英文文档。研究透RStudio后，随时补充更新这一内容。
+RStudio 界面由上方的工具栏与下方的四个小窗口组成。
+
+- 左上角的命令区，用来编辑、粘贴命令,窗口上部的小图标是较为常用的几个功能，如保存(`Save current document`)、`Knit`^[Knit 功能可根据数据处理结果生成所需格式的文档，如 HTML、PDF、Word 等。]、运行(`Run`)；
+- 左下角的控制区(`console`)^[控制区显示脚本运行结果，亦可直接输入命令，回车运行。]；
+- 右下角的功能区，依次为 `Files`(打开本地文件)、`Plots`(显示图形结果)、`Packages`(包的相关功能)、`Help`(帮助)、`Viewer`五个功能；
+- 右上角的`Environment`与`History`，分别用来对数据与已运行的命令进行显示和操作。
+
+![](pic-rstudio-overview.png)
+
+#### 新建文档类型
+
+在`File`菜单下的`New File`子菜单里可看到所有可新建文档类型，点击`R Script`可新建一个空白文档，此外还有 R Notebook、R Markdown、C++ File 文档等。
+
+![](pic-rstudio-newfile.png)
+
+#### 数据导入
+
+通过`File`菜单下的`Import Dataset`即可进行数据的导入，可导入 CSV、Excel、SPSS、SAS、Stata 五种格式的文件。导入的文件会在命令区以新窗口的形式呈现。
+
+![](pic-rstudio-importdata.png)
+
+#### 包的更新
+
+软件使用中经常会有 R 包的更新，可以通过`Tools`菜单下的`Check For Updates`功能检查待更新的 R 包，也可以直接点击右下角`Packages`功能区的`Update`按钮，功能相同。
+
+![](pic-rstudio-update-package.png)
+
+#### 默认文本编码格式
+
+为了避免打开数据文件时中文变成乱码，需要修改默认文本编码格式，点击`Tools`菜单下的`Global Options`子菜单，在弹出窗口中点击`Code`中的`Saving`，将默认文本编码格式(Default text coding)修改为 UTF-8^[UTF-8(8-bit Unicode Transformation Format)又称万国码,由Ken Thompson于1992年创建,用在网页上可以统一页面显示中文简体繁体及其它语言。]。当打开中文数据时在`File`-->`Reopen with Ecoding`下选择 UTF-8 格式就可以正常显示中文。
+
+![](pic-rstudio-defalult-coding.png)
+
+#### 速查表
+
+为方便 RStudio 的使用，`Help`菜单内设置了`Cheatsheet `提供速查功能，使用者也可以通过`Help`下`Markdown Quick Reference`功能迅速入门 Markdown 语法。
+
+![](pic-rstudio-MarkdownQuickReference.png)
  
-对初级用户而言，RStudio 的最初调试只涉及 Tools 菜单下的 Global Options 子菜单。（（**此处应插入一个光标停留Global Options路径下的截图，命名为pic-rstudio-global.png**））打开后，在 General 选项中可选择与 RStudio 相关联的 R 版本（如果只安装了一个版本的 R，此步骤可忽略），还可设定当前工作目录（working directory）。（（**此处应插入一个停留General路径下的截图，命名为pic-rstudio-general.png**））当前工作目录的设置非常重要，稍后继续说明。在 Appearance 选项中可选择字体、字号和背景颜色，可自行尝试调整到个人觉得舒适的配置。（**此处应插入一个停留Appearance路径下的截图，命名为pic-rstudio-appearance.png**）
+  
+对初级用户而言，RStudio 的最初调试只涉及`Tools`菜单下的`Global Options`子菜单。
 
-**截图应只保留RStudio背景，不要露出Windows背景，保存为png格式，上传该截图文件至DAUR这个repo，在正文中写入类似`![](pic-rstudio_viewmtcars.png)
-`的文字，提交更新后即可看到图片。上传后，删除上面的说明文字。注意图片中的所有文件名字应为小写，与昨晚的截图不一样。**
+![](pic-rstudio-global.png)
+
+打开后，在`General`选项中可选择与 RStudio 相关联的 R 版本（如果只安装了一个版本的 R，此步骤可忽略），还可设定当前工作目录（working directory）。
+
+![](pic-rstudio-general.png)
+
+当前工作目录的设置非常重要，稍后继续说明。在`Appearance`选项中可选择字体、字号和背景颜色，可自行尝试调整到个人觉得舒适的配置。
+
+![](pic-rstudio-appearance.png)
+
 
 ### RStudio 功能简介
 
@@ -44,7 +84,7 @@ install.packages(c("knitr", "rmarkdown", "bookdown", "xaringan", "shiny"))
 View(mtcars)
 ```
 
-此时左上方窗口会出现数据结构示意，并可执行数据排序（点击变量名称中的上下箭头按钮）、筛选（点沙漏形状的 Fitler 按钮）等简单功能。
+此时左上方窗口会出现数据结构示意，并可执行数据排序（点击变量名称中的上下箭头按钮）、筛选（点沙漏形状的`Fitler`按钮）等简单功能。
 
 ![](pic-rstudio_viewmtcars.png)
 
