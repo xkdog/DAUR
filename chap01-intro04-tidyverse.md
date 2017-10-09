@@ -55,7 +55,7 @@ plot(x, y, col = " ", lty = " ", lwd = " ")
 mtcars_renamed <- rename(mtcars, x = mpg)
 ```
 
-但是，`:`、`::`和`:::`的两边不需要空格。
+但是，`:`、`::`和`:::`两侧不需要空格。
 
 ```r
 a <- 1:20
