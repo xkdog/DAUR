@@ -1,5 +1,11 @@
 
-建立较为统一的代码书写风格，可方便不同用户之间的沟通与协作。这里基于[**tidyverse**](https://www.tidyverse.org/)（字面意思即为“整洁的风格”）模式择要介绍目前 R 编程中的主流风格，并根据中文用户的习惯做部分调整和说明。某些内容可能初学者并不一定很快遇到，但仍宜先行阅读，以建立良好的书写规范。详细的**tidyverse**风格说明参见如下链接：
+# **tidyverse** 简介
+
+**tidyverse**有两层基本含义：（1）基于 Google 社区的 R 代码风格（[Google’s R style guide](https://google.github.io/styleguide/Rguide.xml)）衍生的一种使代码清晰可读的编程风格；（2）一系列基于前述风格而编写的数据处理 R 包。**tidyverse**一词中的`tidy`意为整洁，`verse`意为诗篇、诗行，合起来意指数据如诗行般整洁易读，即成为“整洁数据”（tidy data）。熟悉这一风格和相关 R 包，可使数据处理和代码编写过程更为便捷高效，且易于与其他数据分析者交流沟通。
+
+## **tidyverse** 风格
+
+建立较为统一的代码书写风格，可方便不同用户之间的沟通与协作。这里基于[**tidyverse**](https://www.tidyverse.org/)模式择要介绍目前 R 编程中的主流风格，并根据中文用户的习惯做部分调整和说明。某些内容可能初学者并不一定很快遇到，但仍宜先行阅读，以建立良好的书写规范。详细的**tidyverse**风格说明参见如下链接：
 
 <http://style.tidyverse.org>
 
@@ -155,3 +161,89 @@ mtcars %>%
 
 # arrange data ---------------------------
 ```
+
+
+## **tidyverse** 包简介
+
+作为 R 包的tidyverse集合了当下最为流行的数据处理包，是简化数据操纵、便利统计操作、美化结果呈现的高效工具。
+
+### 基本理念
+
+整洁数据是Hadley等人极力提倡的一个数据处理理念。若要执行统计计算，统计软件对数据格式有一定要求。但通常外部导入的数据并不一定能达到软件处理的要求，而需要进行一定的预处理，此过程通常也称为数据清洗（data cleaing）。实际上，这种前期处理的工作往往占据比狭义的统计分析更多的时间。为此，需要将无序数据（messy data）整理成可供计算机程序识别与处理的、具备特定格式的数据，即整洁数据，其基本特征有三：
+
+1. 每列为一个变量（Each variable is in a column）；
+2. 每行为一个观测为一行（Each variable is in a column）；
+3. 每个单元格为一个取值（Each value is a cell）。
+
+  
+这些特征在后面的例子中会逐一呈现，这里暂不展开。分析者获得的数据有些天然即能达到要求，但很多时候并非如此。使用 tidyverse 包，可高效地将无序数据转为整洁序列，以便软件分析。
+
+
+### 安装与加载
+
+安装 tidyverse 包，即可一次性安装多个系列包。具体如下：
+
+```r
+install.packages("tidyverse")
+```
+
+此命令将安装如下包：
+
+- 最常用数据分析包：
+    - ggplot2，用于数据可视化
+    - dplyr，用于数据操纵
+    - tidyr，用于数据整洁
+    - readr，用于读入 R 格式数据
+    - purrr，用于编程
+    - tibble，用于形成便于数据处理的数据框
+
+- 数据操纵类：
+    - stringr，用于处理字符串数据
+    - lubridate, 用于处理日期和时间数据
+    - forcats，用于处理因子数据
+
+- 数据导入类：
+    - DBI，用于联接数据库
+    - haven，用于读入SPSS、SAS、Stata数据
+    - httr，用于联接网页API
+    - jsonlite，用于读入JSON数据
+    - readxl，用于读入Excel文档
+    - rvest，用于网络爬虫
+    - xml2，用于读入xml数据
+
+- 数据建模类：
+    - modelr，用于使用管道函数建模
+    - broom，用于统计模型结果的整洁
+
+安装成功后，可通过常规方式加载 tidyverse 包，结果如下：
+```{r, warning=FALSE}
+library(tidyverse)
+```
+此时加载的是最常用的数据分析包，如 ggplot2、dplyr、tidyr等。若需其他 tidyverse 包，可再单独导入。
+
+若要查看此中的相关包是否为最新版本，可通过如下命令：
+
+```r
+tidyverse_update()
+```
+
+此时若出现相关更新提示，可遵照执行。
+
+```r
+The following packages are out of date:
+ * dplyr  (0.5.0 -> 0.7.0)
+ * purrr  (0.2.2 -> 0.2.2.2)
+ * tibble (1.2 -> 1.3.3)
+Update now?
+
+1: Yes
+2: No
+
+Selection: 
+```
+
+在`Selection`后键入`1`即可更新相关包。
+
+开始数据分析时，不论是否用到，可先加载 tidyverse 系列包，以便后续工作。此后将对此系列包中的重点 R 包展开详细介绍。
+
+
