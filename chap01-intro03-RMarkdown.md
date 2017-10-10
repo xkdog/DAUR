@@ -1,9 +1,7 @@
 
-
-<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
-
-
 ## R Markdown 语法简介
+
+部分效果需在 RStudio 中 Knit 成 HTML 格式观看，请保证计算机联网。
 
 ## 目录
 
