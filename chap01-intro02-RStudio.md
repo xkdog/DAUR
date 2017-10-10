@@ -89,6 +89,26 @@ View(mtcars)
 ![](pic-rstudio_viewmtcars.png)
 
 ### RStudio 中的常用快捷键
+要想流畅运用 RStudio，常用快捷键的使用是必不可少的。下面列举几个较常用的快捷键。
 
-请补充，使用 Markdown 的表格形式。
+| **功能** | **Windows** | **Mac** |
+|:--------:|:----------:|:-------:|
+| 控制区清屏 | Ctrl + L | Command + L |
+| 新建文档 | Ctrl + Shift + N | Command + Shift + N |
+| 打开文档 | Ctrl + O | Command + O |
+| 保存当前文档 | Ctrl + S| Command +S |
+| 关闭当前文档 | Ctrl + W | Command + W |
+| 关闭所有文档 | Ctrl + Shift + W | Command + Shift + W |
+| 转换为HTML | Ctrl + Shift + H | Command + Shift + H |
+| 运行当前行 | Ctrl + Enter | Command + Enter |
+| 运行当前代码块 | Ctrl + Alt +C / Ctrl + Shift + Enter | Command + Alt +C / Command + Shift + Enter |
+| 插入空代码块 | Ctrl + Alt + I | Command + Alt + I |
+| 补全选中区域空格 | Ctrl + Shift + A | Command + Shift + A |
+| 复制 | Ctrl + C | Command + C |
+| 粘贴 | Ctrl + V | Command + V |
+| 剪切 | Ctrl + X | Command + V |
+
+在 RStudio 内可通过工具栏`Help`-->`Keyboard Shortcuts Help`或快捷键 Alt+Shift+K 来查看所有快捷键，按任意键退出。
+
+![](pic-rstudio-KeyboardShortcuts.png)
 
