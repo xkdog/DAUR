@@ -4,7 +4,7 @@
 ## 目录
 
 * 1 标题
-* 2 斜体&粗体
+* 2 斜体 & 粗体
 * 3 列表
     * 3.1 无序列表
     * 3.2 有序列表
@@ -244,7 +244,7 @@ Markdown 支持两种形式的链接语法，分别是行内式与参考式。
 
 [南开大学](http://www.nankai.edu.cn/)
 
-[南开大学](http://www.nankai.edu.cn/ "官网")
+[南开大学](http://www.nankai.edu.cn/ "南开大学官网")
 
 #### 4.2 **参考式** 
 
@@ -421,29 +421,31 @@ R语言：
 
 * `$ $`表示行内公式；
 
-* `$$ $$`表示整行公式。
+* `$$ $$`表示行间公式。
 
 #### 代码：
 ```
-质量守恒方程：$E = m * c ^ 2$
+质量守恒方程：$ E = m * c ^ 2 $
 ```
 
 #### 显示：
 
-质量守恒方程：$E = m * c ^ 2$
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+
+质量守恒方程：$ E = m * c ^ 2 $
 
 #### 代码：
 ```
-$$\sum_{i=1}^n a_i=0$$
+$$ \sum_{i = 1}^n a_i = 0 $$
 
-$$f(x_1,x_x,\ldots,x_n)=x_1^2 + x_2^2 + \cdots + x_n^2$$
+$$ f(x_1, x_2, \ldots, x_n) = x_1^2 + x_2^2 + \cdots + x_n^2 $$
 ```
 
 #### 显示：
 
-$$\sum_{i=1}^n a_i=0$$
+$$ \sum_{i = 1}^n a_i = 0 $$
 
-$$f(x_1,x_x,\ldots,x_n)=x_1^2 + x_2^2 + \cdots + x_n^2$$
+$$ f(x_1, x_2,\ldots, x_n) = x_1^2 + x_2^2 + \cdots + x_n^2 $$
 
 ## 10 **表格**
 
