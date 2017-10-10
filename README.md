@@ -56,11 +56,11 @@ This repo was built for my ongoing project of publishing an introductory Chinese
     - ggplot2 风格绘图
     - 科研论文中的统计绘图
 1. Chap05: 数据分析基础
-　　　- 描述统计
-    　-　假设检验与置信区间
-      -　线性回归
-      -　方差分析
-      -　广义线性模型
+    - 描述统计
+    - 假设检验与置信区间
+    -　线性回归
+    -　方差分析
+    -　广义线性模型
 
 吕小康
 
