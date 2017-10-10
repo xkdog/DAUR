@@ -38,6 +38,31 @@ This repo was built for my ongoing project of publishing an introductory Chinese
 - 未尽事宜，请联系xkdog@126.com。
 
 
+## 章节预想
+
+1. Chap01: 软件基础知识
+  - R 简介
+  - RStudio 简介
+  - tidyverse 简介
+1. Chap02: R 基础命令
+1. Chap03: tidyverse 数据处理R包
+  - dplyr
+  - tidyr
+  - lubridate
+  - stringr
+  - rvest
+1. Chap04: R 绘图
+  - R 基础绘图命令
+  - ggplot2 风格绘图
+  - 科研论文中的统计绘图
+1. Chap05: 数据分析基础
+  - 描述统计
+  - 假设检验与置信区间
+  - 线性回归
+  - 方差分析
+  - 广义线性模型
+
+
 吕小康
 
 南开大学周恩来政府管理学院
