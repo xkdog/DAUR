@@ -1,4 +1,8 @@
 
+
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+
+
 ## R Markdown 语法简介
 
 ## 目录
@@ -429,8 +433,6 @@ R语言：
 ```
 
 #### 显示：
-
-<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 
 质量守恒方程：$ E = m * c ^ 2 $
 
