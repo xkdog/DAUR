@@ -43,7 +43,7 @@ This repo was built for my ongoing project of publishing an introductory Chinese
 1. Chap01: 软件基础知识
     - R 简介
     - RStudio 简介
-    - R Markdown 简介
+    - R Markdown 简介
     - tidyverse 简介
 1. Chap02: R 基础命令
 1. Chap03: tidyverse 数据处理R包
@@ -56,7 +56,7 @@ This repo was built for my ongoing project of publishing an introductory Chinese
     - ggplot2 风格绘图
     - 科研论文中的统计绘图
 1. Chap05: 数据分析基础
-　　　-　描述统计
+　　　- 描述统计
     　-　假设检验与置信区间
       -　线性回归
       -　方差分析
