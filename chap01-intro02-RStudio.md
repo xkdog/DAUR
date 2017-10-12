@@ -108,7 +108,7 @@ View(mtcars)
 | 粘贴 | Ctrl + V | Command + V |
 | 剪切 | Ctrl + X | Command + V |
 
-在 RStudio 内可通过工具栏`Help`-->`Keyboard Shortcuts Help`或快捷键 Alt+Shift+K 来查看所有快捷键，按任意键退出。
+在 RStudio 内可通过工具栏`Help`/`Tools`-->`Keyboard Shortcuts Help`或快捷键 Alt+Shift+K 来查看所有快捷键，按任意键退出。
 
 ![](pic-rstudio-KeyboardShortcuts.png)
 
