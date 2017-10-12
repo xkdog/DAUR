@@ -576,7 +576,7 @@ C 语言里的函数 `scanf()` 如何使用？
 
 形式2：
 
-![](C:\Users\john\zhang\Rsave\pre-rstudio-code.png)
+![](pic-pre-rstudio-code.png)
 
 #### 显示：
 
