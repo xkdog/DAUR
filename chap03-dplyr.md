@@ -124,7 +124,7 @@ BMI | 肥胖程度
 < 18.5 | 偏瘦（Underweight）
 18.5~24.9 | 正常（Normal）
 25.0~29.9 | 偏胖（Overweight）
->= 30.0   | 肥胖（Obesity）
+`>=` 30.0   | 肥胖（Obesity）
 
 
 依据此表，对前述 BMI 值进行分类，该变量命名为`class`。
