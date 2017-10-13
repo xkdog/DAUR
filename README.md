@@ -45,16 +45,20 @@ This repo was built for my ongoing project of publishing an introductory Chinese
     - RStudio 简介
     - R Markdown 简介
     - tidyverse 简介
-1. Chap02: R 基础命令
-1. Chap03: tidyverse 数据处理R包
-    - dplyr
-    - tidyr
-    - lubridate
-    - stringr
-    - rvest
+1. Chap02: R 基础操作
+    - 数据结构
+    - 数据导入
+    - 基础命令
+    - 数据管理
+1. Chap03: **tidyverse** 数据处理 R 包
+    - **dplyr**
+    - **tidyr**
+    - **lubridate**
+    - **stringr**
+    - **rvest**
 1. Chap04: R 绘图
     - R 基础绘图命令
-    - ggplot2 风格绘图
+    - **ggplot2** 风格绘图
     - 科研论文中的统计绘图
 1. Chap05: 统计分析基础
     - 描述统计
