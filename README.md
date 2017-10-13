@@ -54,7 +54,7 @@ This repo was built for my ongoing project of publishing an introductory Chinese
     - **dplyr**
     - **tidyr**
     - **lubridate**
-    - **stringr**
+    - **stringr**
     - **rvest**
 1. Chap04: R 绘图
     - R 基础绘图命令
