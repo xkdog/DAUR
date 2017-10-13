@@ -1,7 +1,7 @@
 
 # **tidyverse** 简介
 
-**tidyverse**有两层基本含义：（1）基于 Google 社区的 R 代码风格（[Google’s R style guide](https://google.github.io/styleguide/Rguide.xml)）衍生的一种使代码清晰可读的编程风格；（2）一系列基于前述风格而编写的数据处理 R 包。**tidyverse**一词中的`tidy`意为整洁，`verse`意为诗篇、诗行，合起来意指数据如诗行般整洁易读，即成为“整洁数据”（tidy data）。熟悉这一风格和相关 R 包，可使数据处理和代码编写过程更为便捷高效，且易于与其他数据分析者交流沟通。
+**tidyverse**有两层基本含义：（1）基于 Google 社区的 R 代码风格（[Google’s R style guide](https://google.github.io/styleguide/Rguide.xml)）衍生的一种使代码清晰可读的编程风格；（2）一系列基于前述风格而编写的数据处理 R 包。**tidyverse**一词中的`tidy`意为整洁，`verse`意为诗篇、诗行，合起来意指代码或数据如诗行般整洁易读，即成为“整洁代码”（tidy code）或“整洁数据”（tidy data）。熟悉这一风格和相关 R 包，可使数据处理和代码编写过程更为便捷高效，且易于与其他数据分析者交流沟通。
 
 ## **tidyverse** 风格
 
