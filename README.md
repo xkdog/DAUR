@@ -58,7 +58,7 @@ This repo was built for my ongoing project of publishing an introductory Chinese
     - **rvest**
 1. Chap04: R 绘图
     - R 基础绘图命令
-    - **ggplot2** 风格绘图
+    - **ggplot2** 风格绘图
     - 科研论文中的统计绘图
 1. Chap05: 统计分析基础
     - 描述统计
