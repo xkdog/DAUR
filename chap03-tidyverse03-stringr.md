@@ -10,15 +10,15 @@ R 基础安装包中内置了一些字符串处理函数，能在很大程度上
 
 函数名称  | 功能
 ----------|--------------
-`nchar(x)`  | 计算向量 x 中的字符数、字节数或宽度
+`nchar(x)`  | 计算向量 `x` 中的字符数、字节数或宽度
 `substr(x, start, end)`  |  指定起始位置截取子字符串
-`grep(pattern, x)`  | 检索向量 x 中的元素是否包含指定的模式，并返回其在 x 中的序位
-`sub(pattern, replacement, x)` | 替换向量 x　中的指定模式
+`grep(pattern, x)`  | 检索向量 `x` 中的元素是否包含指定的模式，并返回其在 `x` 中的序位
+`sub(pattern, replacement, x)` | 替换向量`x`　中的指定模式
 `strsplit(x, split)` | 指定位置切割字符串
-`paste(x, y, sep = "")` | 拼接向量 x 与 y
-`toupper(x)` | 将 x 中的所有英文字母转为大写（upper case）
-`tolower(x)` | 将 x 中的所有英文字母转为小写（lower case）
-`cat(x, y)` | 连接向量并定制化输出至屏幕或文件， cat 是英文 concatenate（串联、合并）的缩写
+`paste(x, y, sep = "")` | 拼接向量 `x` 与 `y`
+`toupper(x)` | 将 `x` 中的所有英文字母转为大写（upper case）
+`tolower(x)` | 将 `x` 中的所有英文字母转为小写（lower case）
+`cat(x, y)` | 连接向量并定制化输出至屏幕或文件， `cat` 是英文 concatenate（串联、合并）的缩写
 
 以下通过一些实例说明上述函数的使用方式。诸多演示将使用如下的简单汉语字符向量。
 
@@ -196,10 +196,10 @@ str_trunc(string,
 
 trunc是英文 truncate 的缩写，其中
 
-- string：待操纵的字符串
-- width：截断后的最大宽度
-- side：指定截断的方向
-- ellipis：指明被移除位置的替代符号，默认 ...（宽度为3）
+- `string`：待操纵的字符串
+- `width`：截断后的最大宽度
+- `side`：指定截断的方向
+- `ellipis`：指明被移除位置的替代符号，默认 ...（宽度为3）
 
 ```{r}
 str_trunc(x, 4, side = "left")
@@ -332,10 +332,10 @@ cat(str_wrap(paragraph, width = 40, indent = 4))
 名称  | 符号
 ------|-----
 空格符（space）  |     
-水平制表符（horizontal tab） | \\t 
-垂直制表符（vertical tab） | \\v
+水平制表符（horizontal tab） | `\t` 
+垂直制表符（vertical tab） | `\v`
 换行符（line feed） | \\n
-回车符（carriage return） | \\r
+回车符（carriage return） | `\r`
 
 注意表格空格符对应的符号为空，这并不表示没有符号，而是表示空格符号。请参考此两者的区别：`""`和`" "`，前一对双引号中无任何符号，后一对双引号中有一个空格。
 
