@@ -55,7 +55,7 @@ This repo was built for my ongoing project of publishing an introductory Chinese
     - **tidyr**
     - **lubridate**
     - **stringr**
-    - **rvest**
+    - **rvest**
 1. Chap04: R 绘图
     - R 基础绘图命令
     - **ggplot2** 风格绘图
