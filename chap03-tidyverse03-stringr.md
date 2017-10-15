@@ -348,8 +348,8 @@ cat(str_wrap(paragraph, width = 40, indent = 4))
 这个链接中，给出自1954年以来的历届政府工作报告。每个报告均以单独链接的方式存在，点击后即可阅读相关内容。若要一次性爬取所有报告内容，首先需要获得每年政府工作报告的链接地址。网络爬虫涉及基础网页结构知识和相关软件包的学习，这里暂不展开，只结合 **rvest** 等 R 包的相关函数展示相关说明，以说明`str_trim()`的功能（请确保联网以执行相关功能，并确定已安装 **rvest** 包）。
 
 ```{r}
-library(rvest)
 library(xml2)
+library(rvest)
 library(stringr)
 url <- "http://www.gov.cn/guowuyuan/baogao.htm"
 reports <- read_html(url)
