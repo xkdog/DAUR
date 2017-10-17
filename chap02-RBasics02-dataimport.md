@@ -3,8 +3,8 @@
 
 # 目录
 
-* [1 键盘输入](#1-键盘输入)
-* [2 从文本文件导入数据](#2-从文本文件导入数据)
+* [键盘输入](#键盘输入)
+* [导入外部数据](#导入外部数据)
     * [2.1 txt 文档](#21-txt-文档)
     * [2.1 CSV 文档](#21-csv-文档)
 * [3 从 excel 文档导入数据](#3-从-excel-文档导入数据)
@@ -74,11 +74,11 @@ filename <- read.csv("xxx.csv", )
 - `...`表示其他参数，具体可使用`?read.table()`查询
 
 
-##  导入 Excel 格式数据
+#### 导入 `Excel` 格式数据
 
 对已安装 Office 软件的用户，推荐先将 Excel 文件导出为`csv`文件，再使用`read.csv()`导入。如想直接导入 Excel 格式数据，通常需要安装相关 R 包。
 
-如果已经安装了 Java 环境的用户，传统上可通过安装 **xlsx** 来导入 Excel 数据。但 Java 环境并非由 Windows 平台默认安装，故需用户自行下载安装，稍显繁琐。现在，忆可使用 **openxlsx** 包中的`read.xlsx（）`函数来实现同样功能，此包无须安装 Java 环境。
+如果已经安装了 Java 环境的用户，传统上可通过安装 **xlsx** 来导入 Excel 数据。但 Java 环境并非由 Windows 平台默认安装，故需用户自行下载安装，稍显繁琐。现在，亦可使用 **openxlsx** 包中的`read.xlsx（）`函数来实现同样功能，此包无须安装 Java 环境。
 
 函数 `read.xlsx()` 将 excel 工作表导入到数据框中，语法：
 ```
@@ -96,18 +96,18 @@ excel <- read.xlsx("LIST.xlsx", sheet = 1)
 
 ![](C:\Users\john\zhang\Rsave\pre-rstudio-excel.png)
 
-## 4 导入 SPSS 数据
+#### 4 导入 `SPSS` 格式数据
 
-* 通过 `foreign` 包中的函数 `read.spss()` 导入到 R 中
+- 通过 **foreign** 包中的函数 `read.spss()` 导入到 R 中
 
-*`foreign` 包已被默认安装*
+ **foreign** 包已被默认安装
 
-* 通过 `Hmisc` 包中的函数 `spss.get()` 导入到 R 中
-    * 下载安装 `Hmisc` 包：
+- 通过 **Hmisc** 包中的函数 `spss.get()` 导入到 R 中
+    - 下载安装 **Hmisc** 包：
     ```
     install.packages("Hmisc")
     ```
-    * 使用如下代码导入：
+    - 使用如下代码导入：
     ```
     libiary()
     spss <- spss.get(spssdata.sav", use.vaule.labels = TRUE)
@@ -119,11 +119,11 @@ excel <- read.xlsx("LIST.xlsx", sheet = 1)
  
 *spss 是导入 R 后的数据框*
 
-## 5 导入 SAS 数据
+#### 5 导入 `SAS` 格式数据
 
 #### 5.1 已安装 SAS
 
-* `Hmisc` 包中的函数 `sas.get()`
+- **Hmisc** 包中的函数 `sas.get()`
 
 例：导入一个名为 data.sas7bdat 的 SAS 数据集文件，其位于 Windows 系统中 C:/sasdata 文件夹中
 
@@ -140,11 +140,11 @@ sas <- sas.get(libraryName = datadir, name = "data", sasprog = sasexe)
 
 *sasprog 是 SAS 可运行程序的完整路径*
 
-* 将 SAS 数据集保存为 CSV 文件，再用前述方式将其导入到 R 中
+- 将 SAS 数据集保存为 CSV 文件，再用前述方式将其导入到 R 中
 
 #### 5.2 未安装 SAS
 
-* 使用函数 `read.sas7dbat()` 读取 sas7dbat 格式的 SAS 数据集
+- 使用函数 `read.sas7dbat()` 读取 sas7dbat 格式的 SAS 数据集
 
 代码如下：
 ```
@@ -152,9 +152,9 @@ library(sas7dbat)
 sas <- read.sas7dbat("C:/sasdata/data.sas7bdat")
 ```
 
-* 商业软件 Stat/Transfer 可将 SAS 数据集保存为 R 数据框
+- 商业软件 Stat/Transfer 可将 SAS 数据集保存为 R 数据框
 
-## 6 导入 Stata 数据
+## 6 导入 `Stata` 数据
 
 简单直接，代码如下：
 
@@ -165,7 +165,7 @@ stata <- read.dta("data.dta")
 
 ## 7 R 数据导出
 
-* 使用函数 `write.csv()` 将数据导出为 csv 文件
+- 使用函数 `write.csv()` 将数据导出为 csv 文件
 
 例：
 ```
@@ -175,4 +175,4 @@ write.csv(prac01, "prac01.csv")
 
 ![](C:\Users\john\zhang\Rsave\pre-rstudio-export.png)
 
-* csv 文件选择 excel 打开方式即可导出 excel 文档
+- csv 文件选择 excel 打开方式即可导出 excel 文档
