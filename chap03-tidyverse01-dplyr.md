@@ -124,12 +124,12 @@ BMI | 肥胖程度
 < 18.5 | 偏瘦（Underweight）
 18.5~24.9 | 正常（Normal）
 25.0~29.9 | 偏胖（Overweight）
-`>=` 30.0   | 肥胖（Obesity）
+`>=` 30.0   | 肥胖（Obesity）
 
 
 依据此表，对前述 BMI 值进行分类，该变量命名为`class`。
 
-此时使用R的自有函数`within()`来修改数据框可能更为方便。
+此时使用 R 的自有函数`within()`来修改数据框可能更为方便。
 
 ```{r}
 women_bmi <- within(women_bmi, {
@@ -599,3 +599,428 @@ result_by_group
 以下内容待补充。
 
 
+
+
+## 二表动词
+
+数据分析中通常有很多表格，我们需要灵活的工具将表格合并。在**dplyr**中，有三个动词可以同时操作两个表格。
+
+-  变化连接（Mutating joins）：通过匹配表格中的行，向表格中增加新的变量。
+-  筛选连接（Filtering joins）：基于表格中的观测是否与其他表格的观测相匹配来筛选观测值。
+-  集合运算（Set operations）：将属于集合元素的观测组合到数据集中。
+
+（使用这些功能的前提假设是你拥有`tidy data`，即行为观测列为变量的整洁数据。）
+
+所有二表动词运行起来都很相似。若头两个参数为 x 和 y ，然后合并表格，那么最后产生的新表格总是和 x 是相同类型的。
+
+
+### 变化连接（Mutating joins）
+
+变化连接可以将多个表格中的变量组合到一起。
+
+```{r}
+library(dplyr)
+T0 <- c(11.4, 9.6, 10.1, 8.5, 10.3, 10.6, 11.8, 9.8, 10.9,
+10.3)
+C0 <- c(9.1, 8.7, 9.7, 10.8, 10.9, 10.6, 10.1, 12.3, 8.8,
+10.4, 10.9, 10.4)
+T9 <- c(15.3, 14.0, 11.4, 14.1, 15.0, 11.8, 12.3, 14.1,
+17.6, 14.3)
+C9 <- c(9.3, 8.8, 8.8, 10.1, 9.6, 8.6, 10.4, 12.4, 9.3,
+9.5, 8.4, 8.7)
+id.T <- c(1:length(T0)) # 生成序列号, 从1到 T0 的长度值
+id.C <- c(1:length(C0)) # 生成序列号, 从1到 C0 的长度值
+treated <- data.frame(id = id.T, T0, T9) # 将 T0, T9 两个同长度向量合并为一个数据框
+control <- data.frame(id = id.C, C0, C9) # 将 C0, C9 两个同长度向量合并为一个数据框
+left_join(treated, control, by="id")
+```
+
+#### 控制表格是如何匹配的
+
+和 x、y 一样，每个变化连接都要通过参数`by`来控制使用哪些变量来匹配两个表格中的观测值。
+
+- `NULL`，默认值。在这种情况下，**dplyr**会使用两个表格中的所有变量进行匹配，即自然连接。
+
+```{r}
+T0 <- c(11.4, 9.6, 10.1, 8.5, 10.3, 10.6, 11.8, 9.8, 10.9,
+10.3)
+C0 <- c(9.1, 8.7, 9.7, 10.8, 10.9, 10.6, 10.1, 12.3, 8.8,
+10.4, 10.9, 10.4)
+T9 <- c(15.3, 14.0, 11.4, 14.1, 15.0, 11.8, 12.3, 14.1,
+17.6, 14.3)
+C9 <- c(9.3, 8.8, 8.8, 10.1, 9.6, 8.6, 10.4, 12.4, 9.3,
+9.5, 8.4, 8.7)
+id.T <- c(1:length(T0)) # 生成序列号, 从1 到T0 的长度值
+id.C <- c(1:length(C0)) # 生成序列号, 从1 到C0 的长度值
+treated <- data.frame(id = id.T, T0, T9) # 将T0, T9 两个同长度向量合并为一个数据框
+control <- data.frame(id = id.C, C0, C9) # 将C0, C9 两个同长度向量合并为一个数据框
+left_join(treated, control)
+```
+
+- 一个字符向量，`by = x`。这种情况和自然连接很像，但是只使用部分共有变量。
+
+```{r}
+T0 <- c(11.4, 9.6, 10.1, 8.5, 10.3, 10.6, 11.8, 9.8, 10.9,
+10.3)
+C0 <- c(9.1, 8.7, 9.7, 10.8, 10.9, 10.6, 10.1, 12.3, 8.8,
+10.4, 10.9, 10.4)
+T9 <- c(15.3, 14.0, 11.4, 14.1, 15.0, 11.8, 12.3, 14.1,
+17.6, 14.3)
+C9 <- c(9.3, 8.8, 8.8, 10.1, 9.6, 8.6, 10.4, 12.4, 9.3,
+9.5, 8.4, 8.7)
+id.T <- c(1:length(T0)) # 生成序列号, 从1 到T0 的长度值
+id.C <- c(1:length(C0)) # 生成序列号, 从1 到C0 的长度值
+treated <- data.frame(id = id.T, T0, T9) # 将T0, T9 两个同长度向量合并为一个数据框
+control <- data.frame(id = id.C, C0, C9) # 将C0, C9 两个同长度向量合并为一个数据框
+left_join(treated, control, by="id")
+```
+
+- 一个被命名的字符向量，`by = c("x" = "a")`。这会将表`x`中的变量`x`与表`b`中的变量`a`进行匹配。用到的变量也会在输出中被使用。
+
+```{r}
+id_psy <- 1:6
+id_soc <- 1:5
+score_psy <- c(88, 89, 87, 92, 94, 85)
+score_soc <- c(85, 87, 82, 95, 93)
+gender_psy <- c("male", "male", "female", "male", "female", "female")
+gender_soc <- c("male", "female", "female", "female", "male")
+class_psy <- data.frame(id = id_psy, score_psy, gender_psy)
+class_soc <- data.frame(id = id_soc, score_soc, gender_soc)
+left_join(class_psy, class_soc, c("score_psy" = "score_soc"))
+```
+
+#### 连接类型
+
+有四种变化连接的类型，它们的区别在于没有找到匹配的变量时会执行的操作。我们将以下面的例子来阐述：
+
+```{r}
+exm1 <- data_frame(x = 1:4, y = 3:6 )
+exm2 <- data_frame(x = 2:5, a = 5, b = "c")
+```
+
+- `inner_join(x, y)`只包括`x`和`y`中都匹配的观测。
+
+```{r}
+exm1 %>% inner_join(exm2) %>% knitr::kable()
+```
+
+- `left_join(x, y)`包括`x`中的所有观测，不管它们匹配与否。这是最常用的连接类型，因为它保证了不会从原始表格中丢失观测。
+
+```{r}
+exm1 %>% left_join(exm2)
+```
+
+- `right_join(x, y)`包括`y`中的所有观测。它等同于`left_join(y, x)`，只是列的排列不同。
+
+```{r}
+exm1 %>% right_join(exm2)
+exm2 %>% left_join(exm1)
+```
+
+- `full_join()`包括`x`和`y`中的所有观测。
+
+```{r}
+exm1 %>% full_join(exm2)
+```
+
+左、右、全连接被称为**外连接**。当一行不匹配外连接时，新变量会被用来填充缺失值。
+
+#### 观测值
+
+尽管变化连接主要被用来增加新的变量，它们也可以产生新的观测。如果匹配不是唯一的，一个连接会将匹配的观测所有可能的组合都加上。
+
+```{r}
+exm1 <- data_frame(x = 5:8, y = c(5, 8, 9, 10))
+exm2 <- data_frame(x = 5:8, z = c("apple", "orange", "pear", "orange"))
+exm1 %>% left_join(exm2)
+```
+
+### 筛选连接（Filtering joins）
+
+筛选连接用变化连接的方法来匹配观测，但是影响的是观测值，而不是变量。有两种类型：
+
+- `semi_join(x, y)`**保留**了`x`中与`y`中有匹配的所有观测。
+- `anti_join(x, y)`**丢掉**了`x`中与`y`中有匹配的所有观测。
+
+这些在诊断连接不匹配时是非常有用的。
+
+```{r}
+id_psy <- 1:6
+id_soc <- 1:5
+score_psy <- c(88, 89, 87, 92, 94, 85)
+score_soc <- c(85, 87, 82, 95, 93)
+gender_psy <- c("male", "male", "female", "male", "female", "female")
+gender_soc <- c("male", "female", "female", "female", "male")
+class_psy <- data.frame(id = id_psy, score = score_psy,  gender_psy)
+class_soc <- data.frame(id = id_soc, score = score_soc,  gender_soc)
+anti_join(class_psy, class_soc, by = "score")
+```
+
+若担心连接会匹配的观测，那就以`semi_join()`或`anti_join()`开始。`semi_join()`和`anti_join()`不会进行复制，它们只能删除变量。
+
+```{r}
+exm1 <- data_frame(x = 5:8, y = c(5, 8, 9, 10))
+exm2 <- data_frame(x = 4:6, z = c("apple", "orange",  "orange"))
+exm1 %>% nrow()
+exm1 %>% inner_join(exm2, by = "x")
+exm1 %>% semi_join(exm2, by = "x")
+```
+
+### 集合运算
+
+两表动词的最后一种类型是集合运算。这些操作要求`x`和`y`的输入有相同的变量，把观测当集合对待。
+
+- `intersect(x, y)`：只返回`x`和`y`中都存在的观测。
+- `union(x, y)`：返回`x`和`y`中不相同的观测。
+- `setdiff(x, y)`：返回`x`中的观测，不返回`y`中的观测。
+
+比如：
+
+```{r}
+exm1 <- data_frame(x = 1:3, y = 4:6)
+exm2 <- data_frame(x = 1:3, y = c(7L, 8L, 9L))
+```
+
+四种可能的结果是：
+
+```{r}
+intersect(exm1, exm2)
+union(exm1, exm2)
+setdiff(exm1, exm2)
+setdiff(exm2, exm1)
+```
+
+### 强制规则
+
+连接表格时，**dplyr**在判断变量类型是否相同时比 base R 更保守一些。
+
+- 有不同水平的因子会被警告强制转换成字符。
+
+```{r}
+exm1 <- data_frame(x = c(1, 2), y = factor("apple", "orange"))
+exm2 <- data_frame(x = 3:4, y = factor("pear", "apple"))
+full_join(exm1, exm2) %>% str()
+```
+
+- 有相同水平但顺序不同的因子也会被警告强制转换成字符。
+
+```{r}
+exm1 <- data_frame(x = 5, y = factor("apple", levels = c("apple", "orange")))
+exm2 <- data_frame(x = 3, y = factor("orange", levels = c ("orange", "apple")))
+full_join(exm1, exm2) %>% str()
+```
+
+- 因子只在水平完全匹配的情况下才会被保留。
+
+```{r}
+exm1 <- data_frame(x = 5, y = factor("apple", levels = c("apple", "orange")))
+exm2 <- data_frame(x = 3, y = factor("orange", levels = c ("apple", "orange")))
+full_join(exm1, exm2) %>% str()
+```
+
+- 一个因子和一个字符会被警告强制转换成字符。
+
+```{r}
+exm1 <- data_frame(x = 5, y = factor("apple"))
+exm2 <- data_frame(x = 3, y = "apple")
+full_join(exm1, exm2) %>% str()
+```
+
+另外（otherwise），逻辑值（logicals）会默认向上取整，整型变成数值型，但是强制变成字符型会出现错误。
+
+```{r}
+exm1 <- data_frame(x = 2.5, y = 2)
+exm2 <- data_frame(x = 3L, y = 3)
+full_join(exm1, exm2) %>% str()
+```
+```{r}
+exm1 <- data_frame(x = "a", y = 2)
+exm2 <- data_frame(x = 3L, y = 3)
+full_join(exm1, exm2) %>% str()
+```
+
+## 多表动词
+
+**dplyr**没有可以直接操作三个及以上表格的函数。不要像 Advanced R 中提到的使用`purrr:reduce()`或者`Reduce()`，可以迭代将二表动词合并，从而操作你所需要的表格。
+
+
+
+
+## 视窗函数
+
+**视窗函数**是聚集函数的变种。聚集函数有 n 个输入，返回一个值，比如`sum()`和`mean()`；视窗函数返回 n 个值。视窗函数的输出依赖于所有输入值，所以视窗函数中没有直接操作元素的功能，就像`+`或`round()`那样。视窗函数包括：聚集函数的变种，比如`cumsum()`和`cummean()`；排序函数，比如`rank()`；以及补偿函数（taking offsets)，比如`lead()`和`lag()`。
+
+```{r}
+exm_cars <- mtcars %>%
+  as_tibble() %>%
+  select(mpg, cyl, hp, wt) %>%
+  arrange(mpg, hp)
+```
+
+视窗函数经常和`mutate()`、`filter()`函数一起使用。
+
+```{r}
+filter(exm_cars, min_rank(desc(mpg)) <= 6 & mpg > 0)
+mutate(exm_cars, hp_rank = min_rank(hp))
+
+filter(exm_cars, hp > lag(hp))
+mutate(exm_cars, )  # 这个地方编不出有意义的例子了……
+ 
+filter(exm_cars, mpg > mean(mpg))
+mutate(exm_cars, mpg_z = (mpg - mean(mpg)) / sd(mpg))
+```
+
+在读懂这些内容之前，应熟悉`mutate()`和`filter()`。
+
+### 视窗函数的类型
+
+有五种视窗函数。其中两种与聚集函数无关。
+
+- 排序函数：`row_number()`、`min_rank()`、`dense_rank()`、`cume_dist()`、`percent_rank()`和`ntile()`。这些函数都是对单个向量进行操作，最后可以返回多种类型的排序。
+
+- 补偿函数`lead()`和`lag()`可以获得向量中前一个和后一个值，使得计算差异和趋势更加容易了。
+
+另外三种视窗函数都是常见聚集函数的变种。
+
+- 累积函数：`cumsum()`、`cummin()`、`cummax()`（from Base R），以及`cumall()`、`cumany()`、`cummean()`（from **dplyr**）
+
+- 在固定宽度的视窗中进行聚集运算。Base R 和**dplyr**中没有这种函数，但是其他包里有，比如**RcppRoll**。
+
+- 循环聚集，在这种情况下会重复聚集运算来匹配输入的长度。这在 R 中是不需要的，因为向量循环会自动在需要的地方进行循环聚集运算。这些函数在 SQL 中是很重要的，因为聚集函数的存在会让数据库每组只返回一行。
+
+每种函数的具体用法在下文有详细介绍，主要关注的是函数的总体目标以及如何在**dplyr**中使用。如果想了解得更多，可以参考单个函数的文档。
+
+### 排序函数
+
+排序函数都是同一个主题的变种，区别在于如何处理连结问题（handle ties）。
+
+```{r}
+x <- c(2, 3, 3, 4, 4)
+row_number(x)
+min_rank(x)
+dense_rank(x)
+```
+
+如果对 R 比较熟悉的话，你会发现`row_number`和`min_rank()`的功能，可以通过基础的`rank()`和`ties_method`的不同参数值来实现。这些函数可以让我们少打一些代码，而且在 R 和 SQL 之前转换也更容易了。
+
+有两个另外的排序函数可以返回0到1之间的数字。`percent_rank()`可以给出排序的百分数；`cume_dist()`可以给出小于或等于当前值的比例。
+
+```{r}
+cume_dist(x)
+percent_rank(x)
+```
+
+这在你想得到一组值中前10%的数据时会很有用。
+
+```{r}
+filter(exm_cars, cume_dist(desc(hp)) < 0.1)
+```
+
+最后，`ntile()`把数据平分成了 n 份。这是一种粗糙的排序，可以和`mutate()`一起使用来划分数据，从而更进一步分析。
+
+```{r}
+math_psy <- c(88, 89, 90, 85, 86, 91, 94, 93)
+age_psy <- c(19, 20, 20, 20, 18, 21, 19, 21)
+id_psy <- 1:8
+students <- data.frame(math_psy, age_psy, id_psy)
+students_psy <- group_by(students, math_psy, id_psy)
+class_psy <- summarise(students_psy, score_math = sum(math_psy))
+class_psy_quartile <- group_by(class_psy, quartile = ntile(math_psy, 4))   # 例子可能有问题
+summarise(class_psy_quartile, mean(math_psy))
+```
+
+所有排序函数都是按从小到大的顺序进行排列的，这样小的输入值也会得到小的排序数。可以使用`desc()`来从大到小进行排列。
+
+### 领先和延后（Lead and lag）
+
+`lead()`和`lag()`可以生成输入向量的补偿版本，可以是原始向量前面的，也可以是原始向量后面的。
+
+```{r}
+x <- c(1, 3, 5, 6, 7)
+lead(x)
+lag(x)
+```
+
+可以使用这些函数来：
+
+- 计算差异和百分比的变化。
+
+```{r}
+mutate(students,math_delta = math_psy - lag(math_psy))
+```
+
+`lag()`比`diff()`使用起来更方便，因为当有`n`个输入时，`diff()`只能返回`n - 1`个输出值。
+
+- 可以发现数值的变化。
+
+```{r}
+filter(students, id_psy != lag(id_psy))
+```
+
+`lead()`和`lag()`都有一个可选参数`order_by`。如果设置这个参数的话，函数会使用另外的变量代替行的顺序来决定哪个值在前哪个值在后。当你还没有将数据分类或者想要以一种方式分类、滞后另一种（sort one way and lag another）的时候，设置这个参数是非常重要的。
+
+下面的例子显示出如果在需要时你没有特定化`order_by`会发生什么。
+
+```{r}
+exm <- data.frame(x = 15:20, y = 0:5)
+z <- exm[sample(nrow(exm)), ]
+
+wrong <- mutate(z, running = cumsum(y))
+arrange(wrong, x)
+
+right <- mutate(z, running = order_by(x, cumsum(y)))
+arrange(right, x)
+```
+
+### 累积聚集
+
+Base R 提供了累积求和（`cumsum()`）、累积求最小值（`cummin()`）和累积求最大值（`cummax()`），也提供了`cumprod`但是很少用到。其他常见的累加函数有`cumany()`和`cumall()`，`||`和`&&`的累积版本，以及求累积平均值`cummean()`。这些函数没有被包括在 Base R 中，但是**dplyr**提供了一些更高效的版本。
+
+`cumany()`和`cumall()`在一个条件第一次（或最后一次）为真时，选择所有在此条件之前的行或所有在此条件之后的行时是很有用的。
+
+```{r}
+filter(mtcars, cumany(mpg > 30))
+```
+
+像领先和滞后函数，你可能会想控制累加发生的顺序。但是这些函数都没有`order_by`参数，所以**dplyr**提供了`order_by()`来解决这个问题。将排序时依照的变量和视窗函数的调用赋给这个函数就可以使用了。
+
+```{r}
+x <- 1:5
+y <- 5:1
+order_by(y, cumsum(x))
+```
+
+这个函数使用了不太规范的评估，所以不推荐在函数内部使用；在函数内部可以使用`with_order()`这个更简单但精度也更低的函数。
+
+### 循环累积
+
+R 的向量循环在挑选那些大于或小于一个总括性数据的值时会容易一些。之所以称之为循环累积，是因为累积的值和原始向量的长度是一样的。当你想要找到所有大于平均数小于中位数的记录时，循环累积是很有帮助。
+
+```{r}
+filter(mtcars, mpg > mean(mog))
+filter(mtcars, mpg < median(mpg))
+```
+
+尽管大多数 SQL 数据库都没有与`median()`或`quantile()`功能类似的函数，在筛选时可以使用`ntile()`达到同样的效果。比如，`x > median(x)`和`ntile(x, 2) == 2`是等同的；`x > quantile(x, 75)`和`ntile(x, 100) > 75`或`ntile(x, 4) > 3`是等同的。
+
+```{r}
+filter(mtcars, ntile(hp, 2) == 2)
+```
+
+你也可以用这种方法选出一个字段中最大值（`x == max(x)`）或最小值（`x == min(x)`）的记录，不过排序函数会让你对连结有更多控制，而且可以选择记录中的任何数字。
+
+循环聚集和`mutate()`一起使用时也是很有用的。
+
+```{r}
+math_psy <- c(88, 89, 90, 85, 86, 91, 94, 93)
+age_psy <- c(19, 20, 20, 20, 18, 21, 19, 21)
+id_psy <- 1:8
+students <- data.frame(math_psy, age_psy, id_psy)
+mutate(students, difference_value = math_psy - min(math_psy))
+```
+
+也可以计算 z 分数。
+
+```{r}
+mutate(mtcars, mpg_z = (mpg - mean(mpg)) / sd(mpg))
+```
