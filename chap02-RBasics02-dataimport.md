@@ -42,14 +42,14 @@ data <- edit(data)
 ### 导入外部数据
 
 导入外部数据通常需要安装其他相关 R 包。常用的包有：
-- **foreign** 包，R 默认安装，可导入SPSS、Stata、Sas软件的数据
-- **Hmisc** 包，可导入 SPSS、Stata、Sas软件的数据
-- **openxlsx** 包，可导入 Excel 文件
-- **sas7bdat** 包，可导入 Sas 文件
-- **memisc** 包，可导入 SPSS、Stata 格式的问卷调查数据
+- **foreign** 包，R 默认安装，可导入SPSS、Stata、Sas 格式的数据
+- **Hmisc** 包，可导入 SPSS、Stata、Sas 格式的数据
+- **openxlsx** 包，可导入 Excel 格式数据
+- **sas7bdat** 包，可导入 Sas 格式数据
+- **memisc** 包，可导入 SPSS、Stata 格式数据
 - [Hadley](http://hadley.nz/) 开发的 R 包，如 **haven** 等，可导入各类数据
 
-这里先介绍一般性的导入方式，再介绍 Hadley 开发的各类 R 包的导入方式。
+这里先介绍一般性的导入方式，再介绍 Hadley 开发的各类 R 包的导入方式。以下假定读者已安装各相关 R 包。
 
 ####  导入`txt`格式数据
 
@@ -71,7 +71,7 @@ file <- read.table("xxx.txt", header = , sep = "", ...)
 `csv`文档可理解为特殊格式的`txt`文档，其后缀名为`.csv`，意为逗号分隔文件（comma separated values），是常见的通用文件格式，也是跨系统储存数据时的首选文件格式。它可直接使用`read.csv()`函数读取，语法如下：
 
 ```r
-filename <- read.csv("xxx.csv", ...)
+file <- read.csv("xxx.csv", ...)
 ```
 
 其中，
@@ -80,45 +80,40 @@ filename <- read.csv("xxx.csv", ...)
 - `...`表示其他参数，形式同`read.table()`函数，具体也可使用`?read.table()`查询
 
 
-#### 导入 `Excel` 格式数据
+#### 导入 Excel 格式数据
 
 对已安装 Office 软件的用户，推荐先将 Excel 文件导出为`csv`文件，再使用`read.csv()`导入。如想直接导入 Excel 格式数据，通常需要安装相关 R 包。
 
 如果已经安装了 Java 环境的用户，传统上可通过安装 **xlsx** 包来导入 Excel 数据。但 Java 环境并非由 Windows 平台默认安装，需用户自行下载安装，稍显繁琐。现在，也可使用 **openxlsx** 包中的`read.xlsx()`函数来实现同样功能，此包无须安装 Java 环境，更值得推荐。用法如下：
 ```r
-# install.packages("openxlsx") 
 library(openxlsx)
-excel <- read.xlsx("LIST.xlsx", sheet = 1)
+file <- read.xlsx("xxx.xlsx", sheet = 1)
+```
+其中， `sheet = 1`表示读入第一个表单的数据，可通过输入不同数字或表单名来指定要读入的表单。
+
+#### 导入  SPSS 格式数据
+
+通过 **foreign** 包中的`read.spss()`函数可以导入相关文件，**foreign** 包已默认安装，但使用时仍需调用。
+
+```r
+library(foreign)
+file <- read.spss("xxx.sav", use.value.labels = TRUE, to.data.frame = FALSE, ...)
 ```
 
-效果如图：
+其中，
+- `xxx.sav`表示文件名
+- `file, use.value.labels = TRUE`表示默认读入原始文件中的标签
+- `to.data.frame = FALSE`默认不将数据读为数据框而是列表，一般宜设置成`to.data.frame = TRUE`
 
-![](C:\Users\john\zhang\Rsave\pre-rstudio-excel.png)
 
-#### 4 导入 `SPSS` 格式数据
+**Hmisc** 包中的函数 `spss.get()` 导入 SPSS 格式数据时，默认转为数据框。
+  
+```r
+libiary(Hmisc)
+file <- spss.get("xxx.sav", use.vaule.labels = TRUE,  to.data.frame = TRUE)
+```
 
-- 通过 **foreign** 包中的函数 `read.spss()` 导入到 R 中
-
- **foreign** 包已被默认安装
-
-- 通过 **Hmisc** 包中的函数 `spss.get()` 导入到 R 中
-    - 下载安装 **Hmisc** 包：
-    ```
-    install.packages("Hmisc")
-    ```
-    - 使用如下代码导入：
-    ```
-    libiary()
-    spss <- spss.get(spssdata.sav", use.vaule.labels = TRUE)
-    ```
-    
-*spssdata.sav 是要导入的 SPSS 数据文件*
-
-*use.vaule.labels = TRUE 表示让函数将带有值标签的变量导入为 R 中水平对应相同的因子*
- 
-*spss 是导入 R 后的数据框*
-
-#### 5 导入 `SAS` 格式数据
+#### 导入 `SAS` 格式数据
 
 #### 5.1 已安装 SAS
 
