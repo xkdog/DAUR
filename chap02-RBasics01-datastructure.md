@@ -327,4 +327,35 @@ Levels: big < huge < small
 Levels: small < big < huge
 ```
 
-### **tibble** 包
+### tibble
+
+tibble 继承了 data.frame，是用来替换 data.frame 类型的扩展的数据框，语法跟 data.frame 相同，但应用更加方便，可存储任意类型数据。tibble 可使用`tibble()`函数创建。
+```r
+> library(tibble)  # 加载 tibble 包
+> tbl_01 <- tibble(x = 1:5, y = letters[1:5])
+                   # 创建 tibble 类型的数据框
+> tbl_01
+# A tibble: 5 x 2
+      x     y
+  <int> <chr>
+1     1     a
+2     2     b
+3     3     c
+4     4     d
+5     5     e
+```
+可以看到 tibble 类型的数据框列名下标示出了此列数据类型的缩写^[tibble 定义了7种数据类型的缩写：int(整型)、dbl(双精度)、chr(字符型)、dttm(日期 + 时间)、lgl(逻辑型)、fctr(因子)、date(日期)]。
+
+```r
+# 查看 tbl_01 的属性
+> attributes(tbl_01)
+$names      # 列名
+[1] "x" "y"
+
+$class      # 类型
+[1] "tbl_df"     "tbl"        "data.frame"
+
+$row.names  # 行名
+[1] 1 2 3 4 5
+```
+由于 tibble 是一个新的数据类型，应当注意 tibble 与其他原有类型之间的转换，转型函数：`as.tibble()`。此外 tibble 类型与传统数据框还有一些区别，若感兴趣可自行搜索了解。
