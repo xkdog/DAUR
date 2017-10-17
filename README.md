@@ -46,10 +46,10 @@ This repo was built for my ongoing project of publishing an introductory Chinese
     - R Markdown 简介
     - **tidyverse** 简介
 1. Chap02: R 基础操作
-    - 数据结构
-    - 数据导入
-    - 基础命令
-    - 数据管理
+    - 数据结构
+    - 数据导入
+    - 基础命令
+    - 数据管理
 1. Chap03: **tidyverse** 数据处理 R 包
     - **dplyr**
     - **tidyr**
