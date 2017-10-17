@@ -35,11 +35,19 @@ data <- edit(data)
 
 - 单击列的标题，可以修改变量名与变量类型
 - 单击未使用的标题可以添加新的变量
-- 编辑器关闭后，结果会保存到之前赋值的对象中，再次调用 `data <- edit(data)` 即可
+- 编辑器关闭后，结果会保存到之前赋值的对象中。
 
-应注意的是， `edit()` 事实上是在对象的一个副本上进行操作的。如果未将其赋值到一个目标上，所有修改将会全部丢失。
+应注意的是， `edit()` 是在数据对象的副本上进行操作的。若未将其赋值到到原有对象中，所有修改将会丢失。
 
 ### 导入外部数据
+
+导入外部数据通常需要安装其他相关 R 包。常用的包有：
+- **foreign** 包，R 默认安装，可导入SPSS、Stata、Sas软件的数据
+- **Hmisc** 包，可导入 SPSS、Stata、Sas软件的数据
+- **openxlsx** 包，可导入 Excel 文件
+- **sas7bdat** 包，可导入 Sas 文件
+- **memisc** 包，可导入 SPSS、Stata 格式的问卷调查数据
+- [Hadley](http://hadley.nz/) 开发的 R 包，如 **haven** 等，可导入各类数据
 
 这里先介绍一般性的导入方式，再介绍 Hadley 开发的各类 R 包的导入方式。
 
@@ -63,31 +71,22 @@ file <- read.table("xxx.txt", header = , sep = "", ...)
 `csv`文档可理解为特殊格式的`txt`文档，其后缀名为`.csv`，意为逗号分隔文件（comma separated values），是常见的通用文件格式，也是跨系统储存数据时的首选文件格式。它可直接使用`read.csv()`函数读取，语法如下：
 
 ```r
-filename <- read.csv("xxx.csv", )
+filename <- read.csv("xxx.csv", ...)
 ```
 
 其中，
 
 - `xxx`表示待读取的文件名
-- `header = TRUE`表示将数据第一行读为变量名（默认选项），`header = FALSE`表示不将数据第一行读为变量名
--  `sep = ""`表示分隔符，引号中可填入空格（即`" "`，两个引号之间有一个英文空格）、回车符（`\r`）、换行符（`\n`）、制表符（`\t`）等
-- `...`表示其他参数，具体可使用`?read.table()`查询
+- `...`表示其他参数，形式同`read.table()`函数，具体也可使用`?read.table()`查询
 
 
 #### 导入 `Excel` 格式数据
 
 对已安装 Office 软件的用户，推荐先将 Excel 文件导出为`csv`文件，再使用`read.csv()`导入。如想直接导入 Excel 格式数据，通常需要安装相关 R 包。
 
-如果已经安装了 Java 环境的用户，传统上可通过安装 **xlsx** 来导入 Excel 数据。但 Java 环境并非由 Windows 平台默认安装，故需用户自行下载安装，稍显繁琐。现在，亦可使用 **openxlsx** 包中的`read.xlsx（）`函数来实现同样功能，此包无须安装 Java 环境。
-
-函数 `read.xlsx()` 将 excel 工作表导入到数据框中，语法：
-```
-read.xlsx(file, n)
-```
-
-*file 是文件名， n 是需要导入的工作表序号*
-
-```{r}
+如果已经安装了 Java 环境的用户，传统上可通过安装 **xlsx** 包来导入 Excel 数据。但 Java 环境并非由 Windows 平台默认安装，需用户自行下载安装，稍显繁琐。现在，也可使用 **openxlsx** 包中的`read.xlsx()`函数来实现同样功能，此包无须安装 Java 环境，更值得推荐。用法如下：
+```r
+# install.packages("openxlsx") 
 library(openxlsx)
 excel <- read.xlsx("LIST.xlsx", sheet = 1)
 ```
