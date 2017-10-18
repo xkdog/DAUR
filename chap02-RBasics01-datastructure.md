@@ -1,48 +1,66 @@
 ## R 数据结构
 
-R 的基础数据结构包括向量（Vector）、矩阵（Matrix）、数组（Array）、数据框（DataFrame）和列表（List），其主要区别在于数据的类型与存储方式。
+R 的基础数据结构包括向量（Vector）、矩阵（Matrix）、数组（Array）、数据框（DataFrame）和列表（List），根据数据元素是否异质（是否可以包含不同类型的数据）及其存储方式，可对之做下表格分类。
 
 |        | 向量 | 矩阵 | 数组 | 数据框 | 列表|
 |:------:|:---:|:----:|:----:|:-----:|:---:|
 | 数据类型 | 同质 | 同质 | 同质 | 异质 | 异质|
 | 存储方式 | 一维 | 二维 | 多维 | 二维 | 一维 |
 
+下面进行具体介绍。
 
 ### 向量 Vector
 
-向量是最简单的数据结构^[数字或字符串等所谓的“标量”其实是只含一个元素的向量]，用来存储数值型(numeric)、字符型(character)或逻辑型(logical)数据，且一个向量只能存储一种类型的数据。向量使用`c()`函数进行创建。
-```r
-> vector_num <- c(1, 2, 3)                   # 创建数值型向量 vector_num
-> vector_chr <- c("one", "two", "three")     # 创建字符型向量 vector_chr
-> vector_log <- c(T, TRUE, F, FALSE)         # 创建逻辑型向量 vector_log
-```
-**提醒：**`T`与`F`是逻辑型数据`TRUE`与`FALSE`的缩写，二者等价，故定义变量名时尽量不要使用这两个大写字母。
+向量是 R 中最简单的数据结构。用来存储数值型（numeric）、字符型（character）或逻辑型（logical）数据，且一个向量只能存储一种类型的数据。向量使用`c()`函数进行创建，其中`c`表示 concatenate（联结、串联），或者 combine。R 中不存在“标量”（scalar），单个数字或字符串等所谓的标量其实是只含一个元素的向量。
 
-`c(1, 2, 3)`与`c(1:3)`等价；还可使用类似`vector_num <- 1:5`的懒人命令，但更推荐规范的创建方式。
-
-使用`vector_name[number]`的形式进行向量内元素的访问。
-```r
-> vector_chr <- c("one", "two", "three")
-> vector_chr[2]
-[1] "two"
-> vector_chr[2:3]
-[1] "two"   "three"
-> vector_chr[c(1, 3)]
-[1] "one"   "three"
+```{r}
+vector_num <- c(1, 2, 3)                   # 创建数值型向量 vector_num
+vector_char <- c("one", "two", "three")    # 创建字符型向量 vector_char
+vector_log <- c(T, TRUE, F, FALSE)         # 创建逻辑型向量 vector_log
 ```
-以上三种方式分别访问了 vector_chr 向量的第2个元素、第2到第3个元素、第1和第3个元素。
+其中：
 
-使用`is.numeric()`、`is.character()`、`is.logical()`来判断向量是否为指定类型。
-```r
-> is.numeric(vector_num)
-[1] TRUE
-> is.character(vector_chr)
-[1] TRUE
-> is.logical(vector_log)
-[1] TRUE
-> is.numeric(vector_chr)
-[1] FALSE
+- `T`与`F`是逻辑型数据`TRUE`与`FALSE`的缩写。多数情况下，`T`与`TRUE`、`F`与`FALSE`分别等价，故定义变量名时尽量不要使用这两个大写字母。从规范性出发，尽量不要用缩写表示逻辑型数据。
+
+- `c(1, 2, 3)`与`c(1:3)`等价。还可使用类似`vector_num <- 1:5`的懒人命令，但更推荐规范的创建方式。
+
+使用`vector_name[]`的形式可调用向量中的元素（element），`[]`中填入表示元素位置的整数。
+
+```{r}
+vector_char <- c("one", "two", "three")
+vector_char[2]
+vector_char[2:3]
+vector_char[c(1, 3)]
 ```
+以上三种方式分别调用`vector_char`向量的第2个元素、第2到第3个元素、第1和第3个元素。
+
+在 R 中，向量的长度（length）是指其所包含的元素个数，这可用函数`length()`判定。
+
+```{r}
+length(vector_char)
+```
+
+可使用`is.numeric()`、`is.character()`、`is.logical()`命令来判断向量是否为指定类型。
+
+```{r}
+is.numeric(vector_num)
+is.character(vector_chr)
+is.logical(vector_log)
+is.numeric(vector_chr)
+```
+
+要注意的是，所谓的数值型向量其实包含两种类型数据：数型数据（integer）与双精度型（double）。前者只存储整数而不包含小数，后者可存储`2e-308`至`2e+308`之间的实数，其中`E`表示科学计数法，`2E-308`表示 $2 \times -10^308$，`2E+308`表示 $2 \times 10^308$。在 R 中，用`typeof()`函数可判定对象的类型，而`mode()`函数可判定对象的模式。两者之间存在微妙的区别，试观察如下结果。
+
+```{r}
+x <- c(1:5)
+typeof(x)
+mode(x)
+y <- x / 5
+typeof(y)
+mode(y)
+```
+
+向量是 R 数据结构的基础。
 
 ### 矩阵 Matrix
 
