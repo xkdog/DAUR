@@ -1,30 +1,36 @@
-## R 数据结构
 
-R 的基础数据结构包括向量（Vector）、矩阵（Matrix）、数组（Array）、数据框（DataFrame）和列表（List），根据数据元素是否异质（是否可以包含不同类型的数据）及其存储方式，可对之做下表格分类。
+## R 数据类型
 
-|        | 向量 | 矩阵 | 数组 | 数据框 | 列表|
-|:------:|:---:|:----:|:----:|:-----:|:---:|
-| 数据类型 | 同质 | 同质 | 同质 | 异质 | 异质|
-| 存储方式 | 一维 | 二维 | 多维 | 二维 | 一维 |
+R 中储存和操作的实体可统称为对象（object），其基础数据类型包括向量（vector）、矩阵（matrix）、数组（array）、数据框（data frame）和列表（list）。根据其中所包含的元素（element）是否异质（是否可以包含不同类型的数据）及其存储的维度，可对之做下表格分类。
 
-下面进行具体介绍。
+|          | 向量 | 矩阵 | 数组 | 数据框 | 列表 |
+|:--------:|:----:|:----:|:----:|:------:|:----:|
+| 数据类型 | 同质 | 同质 | 同质 |  异质  | 异质 |
+| 存储维度 | 一维 | 二维 | 多维 |  二维  | 一维 |
 
-### 向量 Vector
+下面进行具体介绍，并在此基础上介绍 R 中两种特殊的数据类型：因子（factor）与 tibble。R 中所有对象的定义可参见其官方网页的说明：
 
-向量是 R 中最简单的数据结构。用来存储数值型（numeric）、字符型（character）或逻辑型（logical）数据，且一个向量只能存储一种类型的数据。向量使用`c()`函数进行创建，其中`c`表示 concatenate（联结、串联），或者 combine。R 中不存在“标量”（scalar），单个数字或字符串等所谓的标量其实是只含一个元素的向量。
+<https://cran.r-project.org/doc/manuals/r-release/R-lang.html#Objects>
+
+### 向量（Vector）
+
+向量是 R 中最简单的数据类型，它通常用来存储数值型（numeric）、字符型（character）或逻辑型（logical）数据，且一个向量只能存储一种类型的数据。向量使用`c()`函数进行创建，其中`c`表示 concatenate（联结、串联），或者 combine。R 中不存在“标量”（scalar），单个数字或字符串等所谓的标量其实是只含一个元素的向量。
 
 ```{r}
-vector_num <- c(1, 2, 3)                   # 创建数值型向量 vector_num
-vector_char <- c("one", "two", "three")    # 创建字符型向量 vector_char
-vector_log <- c(T, TRUE, F, FALSE)         # 创建逻辑型向量 vector_log
+vector_num <- c(1, 2, 3)  
+vector_char <- c("one", "two", "three") 
+vector_log <- c(T, TRUE, F, FALSE)   
 ```
-其中：
 
+其中
+
+- 三行命令分别用于创建数值型、字符型和逻辑型向量 
+- 字符型向量中的元素应放在引号（`""`或`''`）中
 - `T`与`F`是逻辑型数据`TRUE`与`FALSE`的缩写。多数情况下，`T`与`TRUE`、`F`与`FALSE`分别等价，故定义变量名时尽量不要使用这两个大写字母。从规范性出发，尽量不要用缩写表示逻辑型数据。
+- `c(1, 2, 3)`与`c(1:3)`等价。还可使用类似`vector_num <- 1:5`的简化命令，但更推荐规范的创建方式。
 
-- `c(1, 2, 3)`与`c(1:3)`等价。还可使用类似`vector_num <- 1:5`的懒人命令，但更推荐规范的创建方式。
 
-使用`vector_name[]`的形式可调用向量中的元素（element），`[]`中填入表示元素位置的整数。
+使用`vector_name[]`的形式可调用向量中的元素，`[]`中填入表示元素位置的整数。
 
 ```{r}
 vector_char <- c("one", "two", "three")
@@ -44,12 +50,12 @@ length(vector_char)
 
 ```{r}
 is.numeric(vector_num)
-is.character(vector_chr)
+is.character(vector_char)
 is.logical(vector_log)
-is.numeric(vector_chr)
+is.numeric(vector_char)
 ```
 
-要注意的是，所谓的数值型向量其实包含两种类型数据：数型数据（integer）与双精度型（double）。前者只存储整数而不包含小数，后者可存储`2e-308`至`2e+308`之间的实数，其中`E`表示科学计数法，`2E-308`表示 $2 \times -10^308$，`2E+308`表示 $2 \times 10^308$。在 R 中，用`typeof()`函数可判定对象的类型，而`mode()`函数可判定对象的模式。两者之间存在微妙的区别，试观察如下结果。
+在 R 中，用`typeof()`函数可判定对象的类型（数值型、字符型或逻辑型），而`mode()`函数可判定对象的模式。两者之间存在微妙的区别，试观察如下结果。
 
 ```{r}
 x <- c(1:5)
@@ -58,322 +64,413 @@ mode(x)
 y <- x / 5
 typeof(y)
 mode(y)
+z <- c("中国", "天津", "南开")
+typeof(z)
+mode(z)
 ```
 
-向量是 R 数据结构的基础。
+可见，所谓的数值型向量（numeric）其实包含两种类型数据：数型数据（integer）与双精度型（double）。前者只存储整数而不包含小数，后者可存储`2e-308`至`2e+308`之间的实数，其中`E`表示科学计数法，`2E-308`表示 $2 \times 10^{-308}$，`2E+308`表示 $2 \times 10^{308}$。在计算机中，即使无限小数也有一定的限定精度，因此会出现如下情形
 
-### 矩阵 Matrix
+```{r}
+(sqrt(2)) ^ 2 == 2
+```
 
-矩阵是仅包含同质数据的二维数据结构，可以简单理解为许多同类型、等长度向量的组合。矩阵使用`matrix()`函数进行创建。
+其中`sqrt(2)`表示取2的算术平方根，然后再对其平方（`^2`），再让 R 去判断是否精确等于（`==`）数字2，返回结果为否。这正是计算机语言与数学语言的一个区别。好在就通常意义上的数据分析而言，如此微小的计算误差通常可以忽略不计。
+
+若要从一般的数学意义上比较两个数字或数字向量之间的大小差别，可使用 **dplyr** 包中的`near(x, y)`函数，其中`x`、`y`表示两个数字向量。
+
+```{r}
+dplyr::near(sqrt(2) ^ 2, 2)
+```
+
+向量是 R 数据结构的基础。R 中的诸多函数都是**向量化（vectorization）**的，即对向量施加的运算会作用于该向量的每一个元素。前面命令中的`y <- x / 5`已经体现了向量化运算的实质。以下是其他示例。
+
+```{r}
+x <- c(1:10)
+x + 100
+sqrt(x) 
+y <- c(10:1)
+x > y
+pmax(x, y)
+```
+
+其中
+
+- `sqrt()`表示求算术平方根（square root）
+- `x > y`给出逻辑向量，要求`x`与`y`具有同样的长度，检测相同位置上`x`中的元素是否大于`y`中的元素
+- `pmax(x, y)`给出两个同长度数值型向量中对应位置上的较大值
+
+从中不难理解为什么 R 要求向量中的元素必须具备同样的模式，否则就无法进行向量化的运算。
+
+另外可以发现，R 中的对象名称可以重复定义，最近一次赋值的对象会覆盖（即替换）原有对象，且不会有Windows中常见的“你是否确定……”的弹窗提醒。例如
+
+```{r}
+x <- c(1:10)
+x 
+x <- c(10:1)
+x
+x <- x + 1
+x
+```
+
+尤其值得注意的是`x <- x + 1`这种赋值方式。这在传统数学意义上并不常见，但在计算机程序中却很常用，`<-`不妨理解一个箭头，代表着赋值的方向。如果不想覆盖原对象，最好将运算后的对象赋值于新的对象名。
+
+
+
+### 矩阵（Matrix）
+
+矩阵是仅包含同质数据的二维数据结构，可以理解为许多同类型、等长度向量的组合。矩阵使用`matrix()`函数进行创建。
+
+```{r}
+matrix_01 <- matrix(1:6, nrow = 2, ncol = 3)
+matrix_01
+```
+
+这是最基础的示例，其中`nrow = `参数用于设定行数（number of rows），`ncol = `参数用于设定列数（number of columns）。两者确定一个，即可确定矩阵的形式。
+
+从`matrix_01`的结果可看出，`matrix()`函数中默认是以“按列填充”的方式排列数据的。若要按行填充，则可使用`byrow = TRUE`参数。
+
+```{r}
+matrix_02 <- matrix(1:6, nrow = 2, byrow = TRUE)
+matrix_02
+```
+
+还可通过如下方式设置矩阵的维度名称，以增强矩阵的可读性。
+
+```{r}
+cells <- c(1:6)
+row_names <- c("R1", "R2", "R3")
+col_names <- c("C1", "C2")
+matrix_03 <- matrix(cells, nrow = 3, byrow = TRUE, dimnames = list(row_names, col_names))
+matrix_03
+```
+
+
+另可通过`dim()`函数对向量添加维度属性创建矩阵。
+
+```{r}
+vector_matrix <- c(1, 3, 5, 7, 9, 11)
+dim(vector_matrix) <- c(3, 2)
+vector_matrix
+```
+
+
+可使用`matrix_name[, ]`的方式调用矩阵中的元素，逗号前填入行数，逗号事情填入列数，若这两个位置中某个位置留空，则表示选择整行或整列数据。
+
+```{r}
+matrix_04 <- matrix(1:8, nrow = 4)
+matrix_04
+matrix_04[2, ]
+matrix_04[, 1]
+matrix_04[4,2]
+matrix_04[c(1, 3),2]
+```
+
+最后一行命令使用了`c(1, 3)`的方式指定了多个不同行。
+
+
+### 数组（Array）
+
+数组是矩阵的拓展形式，同样只能存储同质数据，但可有2个以上维度。数组使用`array()`函数创建。对初学者而言，这种形式的数据结构较少遇见。
+
+以下命令可创建 $3 \times 2 \times 2$、且各维度均有命名的数组，并填充数字1到12。
+
+```{r}
+dim1 <- c("a1","a2","a3")
+dim2 <- c("b1","b2")
+dim3 <- c("c1","c2")
+array_01 <- array(1:12, c(3, 2, 2), dimnames = list(dim1, dim2, dim3))
+array_01
+```
+
+同样也可通过对向量添加`dim()`属性来创建数组。
+
+```{r}
+vector_array <- c(1, 3, 5, 7, 9, 11, 13, 15)
+dim(vector_array) <- c(2, 2, 2)
+vector_array
+```
+
+数组中元素的调用方式与矩阵类似，可使用`array_name[,,]`的形式。
+
+```{r}
+array_01[1, , ]
+array_01[2, 1, ]
+array_01[, , 2]
+array_01[1, 1, 1]
+```
+
+
+### 数据框（Data Frame）
+
+数据框是 R 里应用最多的数据结构，能存储不同类型的数据，可视为许多等长度（但类型可不相同）向量的组合，也可视为解除了存储数据类型限制的矩阵。数据框使用`data.frame()`函数创建。
+
+
+以下命令可在 R 中创建一个学生信息数据框。
+
+```{r}
+student_id <- c(1:4)
+student_name <- c("a001", "a002", "a003", "a004")
+male <- c(TRUE, TRUE, FALSE, FALSE)
+student_data01 <- data.frame(student_id, student_name, male)
+student_data01
+```
+
+可通过`row.names = `参数设定行标志符（case identifier），即把每行的名称等同于某列中对应行的元素取值。试比较如下命令创建的`student_data02`与`student_data01`的显示结果。
+
+```{r}
+student_data02 <- data.frame(student_id, student_name, male, row.names = student_name)
+student_data02
+```
+
+
+当两个数据框行数相同时，可使用`cbind()`进行合并（bind columns），也可使用此函数将独立的向量合并到数据框中；当两个数据框列数相同且列名一一对应时，可使用`rbind()`进行合并（bind rows）。
+
+先看`cbind()`的示例。
+
+```{r}
+age  <-  c(18, 18, 17, 16)
+cbind(student_data01, age)
+```
+
+再看`rbind()`的示例。
+
+```{r}
+rbind(student_data01, data.frame(student_id = 5, student_name = "a005", male = TRUE))
+```
+上例中临时创建了未命名的数据框，将其合并到了已有数据框`student_data01`中。
+
+在数据框内，列表示**变量（variables）**，行表示**观测（observations）**。此后行文中，列与变量、行与观测分别同义，可替换使用。
+
+与矩阵类似，可使用`dataframe_name[,]`的形式来读取数据框中的元素。
+```{r}
+student_data01[2:3]
+student_data01[1, ]
+student_data01[, 1]
+student_data01[1, 2]
+```
+
+也可使用美元符号`$`提取数据框中的列。
+
+```{r}
+student_data01$student_id
+student_data01$male
+```
+
+还可使用双方括号`[[]]`（通常也简写与`[[`）的形式提取元素。使用`[[]]`时，首先提取数据框中下一个层级的元素（即列），还可在`[[]]`后附加`[]`提取再下一层级的元素（即向量中的基础元素）。请看下例。
+
+```{r}
+student_data01[[2]]
+student_data01[[2]][3]
+```
+
+`[[]]`的链式提取特征在复杂数据结构的元素提取中是较为方便的。
+
+
+使用绑定函数`attach()`和解绑函数`detach()`可以让命令变得简单。绑定后可省略数据框名进行框内数据访问。若同时绑定多个数据框，涉及重名的变量以最近一次绑定的数据框中的变量为准。在真实的数据处理中，应避免过多使用这种方式绑定数据框。
+
+```{r}
+attach(mtcars)
+mpg
+detach(mtcars)
+```
+
+如果未绑定`mtcars`数据框，则会出现如下错误提示：
+
 ```r
-> matrix_01 <- matrix(1:6, nrow = 2, ncol = 3)
-# 创建一个2行3列的矩阵，默认按列填充
-> matrix_01
-     [,1] [,2] [,3]
-[1,]    1    3    5
-[2,]    2    4    6
-
-> matrix_02 <- matrix(1:6, nrow = 2, ncol = 3, byrow = TRUE)
-# 创建按行填充的矩阵
-> matrix_02
-     [,1] [,2] [,3]
-[1,]    1    2    3
-[2,]    4    5    6
-
-> cells <- c(1:6)
-> rnames <- c("R1", "R2", "R3")
-> cnames <- c("C1", "C2")
-> matrix_03 <- matrix(cells, nrow = 3, ncol = 2, byrow = TRUE, dimnames = list(rnames, cnames))
-# 创建按行填充、3行2列、行名为R1-3、列名为C1-2的矩阵
-> matrix_03   
-   C1 C2
-R1  1  2
-R2  3  4
-R3  5  6
-
-> vector_mat <- c(1, 3, 5, 7, 9, 11)
-> dim(vector_mat) <- c(3, 2)
-# 通过对向量添加 dim() 属性进行创建。
-> vector_ma
-     [,1] [,2]
-[1,]    1    7
-[2,]    3    9
-[3,]    5   11
+mpg
+Error: object 'mpg' not found
 ```
 
-矩阵内元素的访问方式与向量类似。
+
+另外，可使用`with()`和`within()`绑定数据框，前者只可绑定但不可修改数据框，后者则可对绑定的数据框进行修改。
+
+使用`with()`命令时，左括号`(`后写入数据框名，待实现的命令需放在`{}`中，可分行写入不同命令。注意此时一般应保存命令结果或使用`print()`输出单行命令的结果，否则默认输出最后一行命令。例如：
+
+```{r}
+with(mtcars, {
+  print(summary(mpg))
+  plot(mpg, wt)
+})
+```
+
+其中
+
+- `summary()`函数用于输出变量的描述统计结果，分别是（括号中为输入结果中对应的英文）最小值（`Min`）、第一四分位数（`1st Qu`）、中位数（`Median`）、均值（`Mean`）、第三四分位数（`3rd Qu`）和最大值（`Max`）。
+- `plot()`函数用于绘制两个变量之间的散点图（scatterplot）。
+
+试比较：
+
+```{r}
+with(mtcars, {
+  summary(mpg)
+  plot(mpg, wt)
+})
+```
+
+此时结果中并没有输入`summary(mpg)`的结果。
+
+`within()`命令的用法与`with()`类似，但可修改数据框，但应注意保存操作结果。
+
+```{r}
+mtcars_new <- within(mtcars, {
+  high <- NA
+  high[mpg >= median(mpg)] <- TRUE
+  high[mpg < median(mpg)] <- FALSE
+})
+```
+
+- `high <- NA`命令在`mtcars`数据框中新生成一个变量，先将其赋值为缺失值（`NA`）
+- `high[mpg >= median(mpg)]`这种方括号的用法在 R 的数据框操纵中非常常见，在此`[]`表示特定的条件。若其对应的`mpg`大于等于中位数，则将`high`赋值为`TRUE`；反之赋值为`FALSE`。
+
+最后可用`head()`命令观察增加新变量的数据框的前6行。
+
+```{r}
+head(mtcars_new)
+```
+
+此例实际上给出了 R 中为指定数据框新增变量的基本方法。
+
+### 列表（List）
+
+列表是 R 中最复杂的数据类型，可包含任何类型的数据，包括向量、矩阵、数组、数据框，还可嵌套包含其他列表，各成分的元素性质与长度可不统一。列表使用`list()`函数创建，并可以为列表内项目命名。
+
+```{r}
+a <- c(1:3)
+b <- matrix(1:6, c(2, 3))
+c <- array(1:12, c(2, 2, 3))
+d <- student_data01
+list_01 <- list(name_01 = a, name_02 = b, name_03 = c, name_04 = d)
+```
+
+上述命令创建了包含向量、矩阵、数组和数据框的列表，并将列表中下一层级的数据分别命名为 `name_01`至`name_04`。
+
+```{r}
+list_01
+```
+
+
+列表同样可使用`[[`或`$`符号进行内部元素的提取。
+
+```{r}
+list_01[[2]]
+list_01[[2]][2]
+list_01$name_01
+```
+
+在知道列表内部元素的命名时，使用`$`提取是较为方便的。否则，使用双方括号的形式提取可能更有针对性。
+
+使用`str()`可展示列表（及其他数据类型）的结构。
+
+```{r}
+str(list_01)
+```
+
+这对了解某些复杂结构的数据对象很有帮助。以下命令给出了`mtcars`数据中以`wt`为自变量，建立`mpg`与`wt`之间的一元线性回归方程模型后，R 中保存的拟合模型（此处命名为`fit`）的数据结构信息。
+
+```{r}
+fit <- lm(mpg ~ wt, data = mtcars)
+summary(fit)
+str(fit)
+```
+
+`str(fit)`的具体内容此时暂不必深究，仅供了解数据结构使用。R 中诸多统计模型的命令结果均储存为列表，若要提取其中某些元素，宜先用此命令检视其数据结构。
+
+### 因子（Factor）
+
+一般数据分析中称为类型变量（categorical data）的数据 ，在 R  中都以因子的形式储存。类型变量依测量水平高低又可分为定类（nominal level，又译称名尺度）和定序（ordinal level，又译顺序尺度）两种类型，前者只有类别属性之分，如通常意义上的颜色（非光谱学意义上）、性别、种族等，后者则有程度大小之别，如年级、以优良中差等方式标注的等级成绩，以及以满意、中立、不满意等方式呈现的对某项公共政策的满意程度等。前者可称为无序因子，后者可称为有序因子（ordered factor）。
+
+技术上讲，因子是建立在整型（integer）向量基础上、只能包含预先定义数值的向量，它具有不同的水平（levels），用于表示因子的所有可能取值。因子和水平的翻译，熟悉实验设计或方差分析的读者应该并不陌生。因子可使用`factor()`函数创建，其用法如下：
+
 ```r
-> matrix_04 <- matrix(1:8, nrow = 4)
-> matrix_04
-     [,1] [,2]
-[1,]    1    5
-[2,]    2    6
-[3,]    3    7
-[4,]    4    8
-> matrix_04[2,]
-[1] 2 6      # 访问第2行的元素
-> matrix_04[,1]
-[1] 1 2 3 4  # 访问第1列的元素
-> matrix_04[4,2]
-[1] 8        # 访问第4行第2个的元素
-> matrix_04[c(1, 3),2]
-[1] 5 7      # 访问第1和第3行的第2个元素
+factor(x, levels = , labels = levels, ordered = , ...)
+```
+其中
+
+- `x`表示待因子化的向量
+- `levels`表示因子的取值（水平）
+- `labels`表示因子的取值标签（默认等同于因子水平本身）
+- `ordered`用于设定有序因子
+- 其他参数请使用`?factor`命令查看
+
+以下通过示例说明`factor()`函数的用法。
+
+```{r}
+factor_01 <- factor(c("male", "female" ,"male", "female"))
+factor_01
+mode(factor_01)
+as.numeric(factor_01)
+levels(factor_01)
 ```
 
-### 数组 Array
+从结果中可看出，R 自动将因子`factor_01`存储为向量`(1, 2, 2, 1)`的形式，其中`female = 1`, `male = 2`，这实际是按变量取值的字母序进行赋值，即确定其水平的排序。使用`levels()`命令可查看因子型数据的具体取值。
 
-数组是矩阵的拓展，同样只能存储同质数据，但可有2个以上维度。数组使用`array()`函数创建。
-```r
-# 创建3x2x2、各维度各有命名的数组，并填充数字1到12
-> dim1 <- c("a1","a2","a3")
-> dim2 <- c("b1","b2")
-> dim3 <- c("c1","c2")
-> array_01 <- array(1:12, c(3, 2, 2), dimnames = list(dim1, dim2, dim3))
-> array_01
-, , c1
-   b1 b2
-a1  1  4
-a2  2  5
-a3  3  6
+若要指定因子水平的特定顺序（非字母序）时，可使用`factor()`中的`levels = `参数进行设定。
 
-, , c2
-   b1 b2
-a1  7 10
-a2  8 11
-a3  9 12
+```{r}
+factor_02 <- factor(c("male", "female" ,"male", "female"), levels = c("male", "female"))
+levels(factor_02)
 ```
 
-```r
-# 通过对向量添加 dim() 属性来创建
-> vector_arr <- c(1, 3, 5, 7, 9, 11, 13, 15)
-> dim(vector_arr) <- c(2, 2, 2)
-> vector_arr
-, , 1
-     [,1] [,2]
-[1,]    1    5
-[2,]    3    7
+针对定序数据，可能需要指定因子的取值排序，使之成为有序因子。此时需使用参数`ordered = TURE`加以设定。
 
-, , 
-     [,1] [,2]
-[1,]    9   13
-[2,]   11   15
+```{r}
+grade_01 <- factor(c("freshman", "sophomore", "junior", "senior"))
+levels(grade_01)
+as.numeric(grade_01)
+grade_02 <-
+  factor(
+    c("freshman", "sophomore", "junior", "senior"),
+    levels = c("freshman", "sophomore", "junior", "senior"),
+    ordered = TRUE
+  )
+levels(grade_02)
+as.numeric(grade_02)
 ```
 
-数组中元素的访问方式跟矩阵相同。
+对于数值型向量，进行因子化时可采用`labels`参数进行设置。
 
-### 数据框 DataFrame
-
-数据框是 R 里应用最多的数据结构，能存储不同类型的数据，可视为许多等长度向量的组合，亦可视为解除了存储数据类型限制的矩阵。数据框使用`data.frame()`函数创建。
-
-```r
-# 创建一个学生信息数据框
-> studentId <- c(1:4)
-> stu_names <- c("a001", "a002", "a003", "a007")
-> is_boy <- c(T, TRUE, F, FALSE)
-> studentdata <- data.frame(studentId, stu_names, is_boy)
-> studentdata
-  studentId stu_names is_boy
-1         1      a001   TRUE
-2         2      a002   TRUE
-3         3      a003  FALSE
-4         4      a007  FALSE
-```
-当两个数据框行数相同时，可使用`cbind()`进行合并；当两个数据框列数相同且列名一一对应时，可使用`rbind()`进行合并。
-```r
-> cbind(studentdata, data.frame(age = c(18, 18, 17, 16)))
-  studentId stu_names is_boy age
-1         1      a001   TRUE  18
-2         2      a002   TRUE  18
-3         3      a003  FALSE  17
-4         4      a007  FALSE  16
-```
-```r
-> rbind(studentdata, data.frame(studentId = 5, stu_names = "a008", is_boy = T))
-  studentId stu_names is_boy
-1         1      a001   TRUE
-2         2      a002   TRUE
-3         3      a003  FALSE
-4         4      a007  FALSE
-5         5      a008   TRUE
-```
-上面两个例子是临时创建了两个未命名的数据框，将其合并到了已有数据框`studentdata`中。在数据框内，列表示变量，行表示观测，刚刚的合并分别是增添了一个变量和一组观测。
-
-使用`dataframe_name[col_number]`的形式来读取数据框的元素。
-```r
-> studentdata[2:3]
-# 读取第2到3列
-  stu_names is_boy
-1      a001   TRUE
-2      a002   TRUE
-3      a003  FALSE
-4      a007  FALSE
-> studentdata$studentId
-# 利用 $ 符号直接选定指定列
-[1] 1 2 3 4
-```
-此外使用绑定函数`attach()`和解绑函数`detach()`可以让命令变得简单。绑定后可省略数据框名进行框内数据访问。
-```r
-> attach(studentdata)
-# 绑定函数 studentdata
-> studentId
-[1] 1 2 3 4
-> detach(studentdata)
-# 解除函数 studentdata 的绑定
-> studentID
-Error: object 'studentID' not found
+```{r}
+gender <- c(1, 0, 0, 1)
+gender_factor <- factor(gender, levels = c(0, 1), labels = c("female", "male"))
+gender_factor
+levels(gender_factor)
 ```
 
-### 列表 List
 
-列表是 R 中最复杂的数据类型，可包含任何类型的数据，包括向量、矩阵、数组、数据框和其他列表。列表使用`list()`函数创建，并可以为列表内项目命名。
-```r
-> a <- c(1:3)
-> b <- matrix(1:6, c(2, 3))
-> c <- array(1:12, c(2, 2, 3))
-> d <- studentdata
-# 分别创建向量、矩阵、数组和数据框
-> list_01 <- list(name_01 = a, name_02 = b, name_03 = c, name_04 = d)
-# 创建包含向量、矩阵、数组和数据框的列表，并将列表内数据分别命名为 name_01-04
-> list_01
-$name_01
-[1] 1 2 3
+需要说明的是，R 在读入外部数据转为数据框的过程中，默认将所有字符型变量转化为了因子数据加以储存。这对于早期的计算机具有节约内存的效果，但对当下的计算机硬件性能而言，这种优势已几乎不复存在。因此，许多后起的 R 包在读入外部数据，不再默认对字符型变量进行因子化，具体宜参考其说明文档加以识别。
 
-$name_02
-     [,1] [,2] [,3]
-[1,]    1    3    5
-[2,]    2    4    6
-
-$name_03
-, , 1
-     [,1] [,2]
-[1,]    1    3
-[2,]    2    4
-
-, , 2
-     [,1] [,2]
-[1,]    5    7
-[2,]    6    8
-
-, , 3
-     [,1] [,2]
-[1,]    9   11
-[2,]   10   12
-
-$name_04
-  studentId stu_names is_boy
-1         1      a001   TRUE
-2         2      a002   TRUE
-3         3      a003  FALSE
-4         4      a007  FALSE
-```
-列表使用`[[]]`（双重方括号）或`$`符号进行数据的读取。
-```r
-> list_01[[2]]
-# 读取列表 list_01 的第2个元素
-     [,1] [,2] [,3]
-[1,]    1    3    5
-[2,]    2    4    6
-
-> list_01[[2]][2]
-# 读取列表 list_01 第2个元素的第2项
-[1] 2
-
-> list_01[[4]]
-# 读取列表 list_01 第4个元素
-studentId stu_names is_boy
-1         1      a001   TRUE
-2         2      a002   TRUE
-3         3      a003  FALSE
-4         4      a007  FALSE
-
-> list_01[[4]][2]
-# 读取列表 list_01 第4个元素的第2列
-  stu_names
-1      a001
-2      a002
-3      a003
-4      a007
-
-> list_01$name_01
-# 读取列表 list_01 内名为 name_01 的元素
-[1] 1 2 3
-```
-
-### 因子 Factor
-
-因子是建立在整型(integer)向量基础上、只能包含预先定义数值的一种向量，具有 class()^[表示该向量是不同于其他向量的因子]、levels()^[显示因子所有可能的取值] 两种属性。
-```r
-> factor_01 <- factor(c("boy", "girl" ,"girl", "boy"))
-# 创建因子 factor_01，并设置初始值为("boy", "girl" ,"girl", "boy")，内含四个元素
-> factor_01
-[1] boy  girl girl boy 
-Levels: boy girl
-```
-R 会将因子 factor_01 存储为向量(1, 2, 2, 1)的形式，其中 boy = 1, girl = 2，按字母顺序进行赋值，levels 亦按字母顺序排列。
-```r
-> class(factor_01)
-[1] "factor"
-# 读取向量 factor_01 的类型
-> levels(factor_01)
-[1] "boy"  "girl"
-# 读取因子 factor_01 的 levels
-
-> factor_01[3] <- "dog"
-Warning message:
-In `[<-.factor`(`*tmp*`, 3, value = "dog") :
-  invalid factor level, NA generated
-# 将因子 factor_01 的第三个元素赋值为 "dog" 失败
-> factor_01[3] <- "boy"
-> factor_01
-[1] boy  girl boy  boy 
-Levels: boy girl
-# 将因子 factor_01 的第三个元素赋值为 "boy" 成功
-```
-当因子内数据具有顺序时，使用`ordered = TRUE`指令进行说明。
-```r
-> factor_02 <- c("huge", "big", "small")
-> factor_02 <- factor(factor_02, ordered = T)
-> factor_02
-[1] huge  big   small
-Levels: big < huge < small
-```
-可以看到`levels`中表示大小的三个单词有了顺序，但此顺序与我们常识不符，需要对 levels 进行指定。
-```r
-> factor_02 <- factor(factor_02, ordered = T, levels = c("small", "big", "huge"))
-> factor_02
-[1] huge  big   small
-Levels: small < big < huge
-```
 
 ### tibble
 
-tibble 继承了 data.frame，是用来替换 data.frame 类型的扩展的数据框，语法跟 data.frame 相同，但应用更加方便，可存储任意类型数据。tibble 可使用`tibble()`函数创建。
-```r
-> library(tibble)  # 加载 tibble 包
-> tbl_01 <- tibble(x = 1:5, y = letters[1:5])
-                   # 创建 tibble 类型的数据框
-> tbl_01
-# A tibble: 5 x 2
-      x     y
-  <int> <chr>
-1     1     a
-2     2     b
-3     3     c
-4     4     d
-5     5     e
+tibble 并不是 R 自有的数据类型。它是 Hadley 等人在数据框函数`data.frame()`基础上衍生的一种扩展性数据框。它本质就是一种数据框，但在显示形式上更加人性化，应用更加方便，可存储任意类型数据。tibble 暂无明确的中文翻译，这里直接使用英文（通常缩写为 tbl）。此类型数据依赖于 **tibble*`** 包（需自行安装），可使用其中`tibble()`函数创建。向量、矩阵和数据框均可通过`as_tibble()`函数转换为 tibble。
+
+以下示例假定已安装 **tibble** 包。
+
+```{r}
+library(tibble)
+tbl_01 <- tibble(x = 1:5, y = letters[1:5])
+tbl_01
 ```
-可以看到 tibble 类型的数据框列名下标示出了此列数据类型的缩写^[tibble 定义了7种数据类型的缩写：int(整型)、dbl(双精度)、chr(字符型)、dttm(日期 + 时间)、lgl(逻辑型)、fctr(因子)、date(日期)]。
 
-```r
-# 查看 tbl_01 的属性
-> attributes(tbl_01)
-$names      # 列名
-[1] "x" "y"
+可以看到 tibble 类型的数据框列名下标示出此列数据类型的缩写，这是它不同于传统数据框的一个特征。同时，在显示 tibble 时，首先给出该 tibble 的维度（行数 $\times$ 列数）。tibble 定义了7种数据类型的缩写：int（integer，整型）、dbl（double，双精度）、chr（character ，字符型）、dttm（date + time，日期 + 时间）、lgl（logical，逻辑型）、fctr（factor，因子）、date（日期）。
 
-$class      # 类型
-[1] "tbl_df"     "tbl"        "data.frame"
 
-$row.names  # 行名
-[1] 1 2 3 4 5
+对于较长的数据框，tibble 默认只显示前10行（相当于`head(x, 10)`的效果），并给出剩余的行数；其显示的列数则视显示窗口的大小而自动调整。这对于展示大型数据框的基本信息是非常有利的。
+
+```{r}
+mtcars_tibble <- as_tibble(mtcars)
+mtcars_tibble
 ```
-由于 tibble 是一个新的数据类型，应当注意 tibble 与其他原有类型之间的转换，转型函数：`as.tibble()`。此外 tibble 类型与传统数据框还有一些区别，若感兴趣可自行搜索了解。
+
+tibble 本身即是数据框，但具有普通数据框不具备的特征；但并不是所有的数据框都是 tibble。这一点从以下命令中可以看得很清楚。
+
+```{r}
+is.data.frame(mtcars_tibble)
+is.tibble(mtcars_tibble)
+is.tibble(mtcars)
+```
+
+其他关于 tibble 的更详细特征，可参见其说明文档：
+
+<https://cran.r-project.org/web/packages/tibble/vignettes/tibble.html>
