@@ -5,29 +5,22 @@
 
 * [键盘输入](#键盘输入)
 * [导入外部数据](#导入外部数据)
-    * [2.1 txt 文档](#21-txt-文档)
-    * [2.1 CSV 文档](#21-csv-文档)
-* [3 从 excel 文档导入数据](#3-从-excel-文档导入数据)
-* [4 导入 SPSS 数据](#4-导入-spss-数据)
-* [5 导入 SAS 数据](#5-导入-sas-数据)
-    * [5.1 已安装 SAS](#51-已安装-sas)
-    * [5.2 未安装 SAS](#52-未安装-sas)
-* [6 导入 Stata 数据](#6-导入-stata-数据)
-* [7 R 数据导出](#7-r-数据导出)
-
-
-**要增加介绍的函数**
-
-- 基础函数
-    - `read.delim()`
-    - `scan()`
-- Hadley 函数
-    - **readr** 包中的函数
-    - **readxl** 包中的函数
-    - **haven** 包中的函数
-- Stata 13 or 14 的函数
-    - **readstata13** 包中的函数
-
+    * [导入`txt`格式数据档](#导入txt格式数据)
+    * [导入`csv`格式数据](#导入csv格式数据)
+    * [导入 Excel 格式数据](#导入-excel-格式数据)
+    * [导入 SPSS 格式数据](#导入-spss-格式数据)
+    * [导入`SAS`格式数据](#导入sas格式数据)
+    * [导入`Stata`格式数据](#导入stata格式数据)
+* [R 数据导出](#r-数据导出)
+* [基础函数](#基础函数)
+    * [read.delim() 函数](#readdelim-函数)
+    * [scan() 函数](#scan-函数)
+* [Hadley 函数](#hadley-函数)
+    * [readr 包中的函数](#readr-包中的函数)
+    * [readxl 包中的函数](#readxl-包中的函数)
+    * [haven 包中的函数](#haven-包中的函数)
+* [Stata 13 or 14 的函数](#stata-13-or-14-的函数)
+    * [readstata13 包中的函数](#readstata13-包中的函数)
 
 ### 键盘输入
 
@@ -105,7 +98,7 @@ file <- read.xlsx("xxx.xlsx", sheet = 1)
 ```
 其中， `sheet = 1`表示读入第一个表单的数据，可通过输入不同数字或表单名来指定要读入的表单。
 
-#### 导入  SPSS 格式数据
+#### 导入 SPSS 格式数据
 
 通过 **foreign** 包中的`read.spss()`函数可以导入相关文件，**foreign** 包已默认安装，但使用时仍需调用。
 
@@ -127,9 +120,9 @@ libiary(Hmisc)
 file <- spss.get("xxx.sav", use.vaule.labels = TRUE,  to.data.frame = TRUE)
 ```
 
-#### 导入 `SAS` 格式数据
+#### 导入`SAS`格式数据
 
-#### 5.1 已安装 SAS
+#### 已安装 SAS
 
 - **Hmisc** 包中的函数 `sas.get()`
 
@@ -150,7 +143,7 @@ sas <- sas.get(libraryName = datadir, name = "data", sasprog = sasexe)
 
 - 将 SAS 数据集保存为 CSV 文件，再用前述方式将其导入到 R 中
 
-#### 5.2 未安装 SAS
+#### 未安装 SAS
 
 - 使用函数 `read.sas7dbat()` 读取 sas7dbat 格式的 SAS 数据集
 
@@ -162,7 +155,7 @@ sas <- read.sas7dbat("C:/sasdata/data.sas7bdat")
 
 - 商业软件 Stat/Transfer 可将 SAS 数据集保存为 R 数据框
 
-## 6 导入 `Stata` 数据
+#### 导入`Stata`格式数据
 
 简单直接，代码如下：
 
@@ -171,7 +164,7 @@ library(foreign)
 stata <- read.dta("data.dta")
 ```
 
-## 7 R 数据导出
+### R 数据导出
 
 - 使用函数 `write.csv()` 将数据导出为 csv 文件
 
@@ -184,3 +177,150 @@ write.csv(prac01, "prac01.csv")
 ![](C:\Users\john\zhang\Rsave\pre-rstudio-export.png)
 
 - csv 文件选择 excel 打开方式即可导出 excel 文档
+
+### 基础函数
+
+#### `read.delim()` 函数
+
+导入以制表符分割的文件，可使用 `read.delim()` 函数，语法如下：
+
+```r
+read.delim(file, header = TRUE, sep = "\t", ...)
+```
+
+#### `scan()` 函数
+
+读取数据时，`scan` 函数可以指定输出变量的数据类型，输出形式可以是向量、矩阵、数据框、列表等。语法如下：
+
+```r
+scan(file = "", what = double(0), nmax = -1, n = -1, sep = "",
+quote = if (sep=="\n") "" else "'\"", dec = ".",
+skip = 0, nlines = 0, na.strings = "NA",
+flush = FALSE, fill = FALSE, strip.white = FALSE, quiet = FALSE,
+blank.lines.skip = TRUE, multi.line = TRUE, comment.char = "")
+```
+
+- file 文件名(在""之内)
+- what 指定数据的类型（缺省值为数值型）
+- nmax 要读取数据的最大数量，如果what是一个列表，nmax则是可以读取的行数（在缺省情况下，`scan` 读取到文件最末端为止的所有数据）
+- n 要读取数据的最大数量(在缺省情况下，没有限制)
+- sep 文件中的字段分隔符
+- skip 在读取数据前跳过的行数
+- nlines 要读取的行数
+- 有关其他参数说明，请参考 `?scan()`
+
+### Hadley 函数
+
+#### **readr** 包中的函数
+
+**readr** 包提供了在 R 中读取文本数据的函数，比正常 R 语言数据的读写快了很多倍，其中主要的几个分别如下：
+
+- 读取含有分隔符文件：
+    - `read_delim()` （可以指定分隔符）
+    - `read_csv()`/`read_csv2`（读取逗号分隔的数据文件）
+    - `read_tsv()` （读取制表符分割数据的文件）
+- 读取固定宽度文件：
+    - `read_fwf()`
+    - `read_table()`
+- 读取日志文件：
+    - `read_log()`
+- `read_lines()` 函数从文件中逐行读取数据
+
+#### **readxl** 包中的函数
+
+**readxl** 包提供了一些在 R 中读取 Excel 表格数据的函数（.xls 和 .xlsx 格式），有如下三种：
+
+- `readxl_example()` 函数读取当前工作路径下的文件，语法如下：
+
+```r
+readxl_example("file.xlsx")
+readxl_example("file.xls")
+```
+
+- `excel_sheets()` 函数用来读取 Excel 电子表格所有数据，语法如下：
+
+```r
+excel_sheets(path)
+```
+
+path 表示文件路径，如 `excel_sheets(readxl_example("datasets.xlsx"))`
+
+- `read_excel()` 函数用来读取 .xls/.xlsx 文件，当明确扩展明后，可以直接使用 `read_xls()` 和 `read_xlsx` 函数，语法如下：
+
+```r
+read_excel(path, sheet = NULL, range = NULL, col_names = TRUE,
+col_types = NULL, na = "", trim_ws = TRUE, skip = 0, n_max = Inf,
+guess_max = min(1000, n_max))
+```
+- 有关 **readxl** 包详细内容请点[这里](https://mran.microsoft.com/web/packages/readxl/readxl.pdf)
+
+#### **haven** 包中的函数
+
+**haven** 包提供了读取SPSS, SAS 和 Stata 统计软件格式数据的函数，分别如下：
+
+- `read_sas("xxx.sas")` 读取 SAS 数据
+- `read_sav("xxx.sav")` 读取 SPSS 数据
+- `read_dta("xxx.dta")` 读取 Stata 数据
+
+### Stata 13 or 14 的函数
+
+#### **readstata13** 包中的函数
+
+**readstata13** 包提供了读取13或14版本的 Stata 数据的函数，分别如下：
+
+- `read.dta13()` 函数用于导入 Stata 格式数据为数据框，命令如下：
+
+```r
+read.dta13(file, convert.factors = TRUE, generate.factors = FALSE,
+encoding = "UTF-8", fromEncoding = NULL, convert.underscore = FALSE,
+missing.type = FALSE, convert.dates = TRUE, replace.strl = TRUE,
+add.rownames = FALSE, nonint.factors = FALSE, select.rows = N)
+```
+
+- `as.caldays()` 函数用于转换 Stata 中 business calendar 日期数据,命令如下：
+
+```r
+as.caldays(buisdays, cal, format = "%Y-%m-%d")
+```
+
+- `get.lang` 函数用于获取默认标签语言，命令如下：
+
+```r
+get.lang(dat, print = T)
+```
+
+- `get.label.name()` 函数用于读取 Stata 标签集名称，命令如下：
+
+```r
+get.label.name(dat, var.name = NULL, lang = NA)
+```
+
+- `get.label()` 函数用于获取 Stata 的标签，命令如下：
+
+```r
+get.label(dat, label.name)
+```
+
+- 有关 **readstata13** 包中其他函数以及有关各函数的参数说明请点击[这里](https://cran.r-project.org/web/packages/readstata13/readstata13.pdf)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
