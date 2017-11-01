@@ -5,7 +5,7 @@ R 很少作为一个数据输入软件，而只作为一个数据分析软件。
 
 导入这些外部数据通常需要安装其他相关 R 包。常用的包有：
 
-- **foreign** 包，R 默认安装，可导入SPSS、Stata、Sas 格式的数据
+- **foreign** 包，R 默认安装，可导入 SPSS、Stata、Sas 格式的数据
 - **Hmisc** 包，可导入 SPSS、Stata、Sas 格式的数据
 - **openxlsx** 包，可导入 Excel 格式数据
 - [Hadley](http://hadley.nz/) 开发的 R 包，如 **haven** 等，可导入各类数据
@@ -50,7 +50,7 @@ file <- read.table("xxx.txt", header = , sep = "", ...)
 
 其中，
 
-- `xxx`表示待读取的文件名
+- `xxx.txt`表示待读取的文件名
 - `header = TRUE`表示将数据第一行读为变量名（默认选项），`header = FALSE`表示不将数据第一行读为变量名
 - `sep = ""`表示分隔符，引号中可填入空格（即`" "`，两个引号之间有一个英文空格）、回车符（`\r`）、换行符（`\n`）、制表符（`\t`）等
 - `...`表示其他参数，具体可使用`?read.table()`查询
@@ -66,7 +66,7 @@ read.delim(file, header = TRUE, sep = "\t", ...)
 
 #### `scan()` 函数
 
-读取数据时，`scan` 函数可以指定输出变量的数据类型，输出形式可以是向量、矩阵、数据框、列表等。语法如下：
+读取数据时，`scan()` 函数可以指定输出变量的数据类型，输出形式可以是向量、矩阵、数据框、列表等。语法如下：
 
 ```r
 scan(file = "", sep = "", ...)
@@ -87,7 +87,7 @@ file <- read.csv("xxx.csv", ...)
 
 其中，
 
-- `xxx`表示待读取的文件名
+- `xxx.csv`表示待读取的文件名
 - `...`表示其他参数，形式同`read.table()`函数，具体也可使用`?read.csv()`查询
 
 
@@ -137,7 +137,7 @@ file <-
 
 #### 导入 Stata 12 及以下数据
 
-**foreign** 包中的`read.dta()`函数可导入 Stata 12及以下版本的数据，语法为
+**foreign** 包中的`read.dta()`函数可导入 Stata 12 及以下版本的数据，语法为
 
 ```r
 library(foreign)
@@ -186,15 +186,15 @@ read_excel("xxx.xlsx", sheet = )
 
 其中，
 
-- `xxx`表示文件名
+- `xxx.xls`、`xxx.xlsx`表示文件名
 - `sheet` 表示 Excel 文件中表单号，默认为1
 - 有关 **readxl** 包详细内容请点[这里](https://mran.microsoft.com/web/packages/readxl/readxl.pdf)
 
 #### **haven** 包中的函数
 
-**haven** 包提供了读取SPSS, SAS 和 Stata 统计软件格式数据的函数，分别如下：
+**haven** 包提供了读取 SPSS, Sas 和 Stata 统计软件格式数据的函数，分别如下：
 
-- `read_sas("xxx.sas")`：读取 SAS 数据
+- `read_sas("xxx.sas")`：读取 Sas 数据
 - `read_sav("xxx.sav")`：读取 SPSS 数据
 - `read_dta("xxx.dta")`：读取 Stata 数据
 
