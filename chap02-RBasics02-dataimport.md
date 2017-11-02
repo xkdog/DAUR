@@ -5,8 +5,8 @@ R 很少作为一个数据输入软件，而只作为一个数据分析软件。
 
 导入这些外部数据通常需要安装其他相关 R 包。常用的包有：
 
-- **foreign** 包，R 默认安装，可导入 SPSS、Stata、Sas 格式的数据
-- **Hmisc** 包，可导入 SPSS、Stata、Sas 格式的数据
+- **foreign** 包，R 默认安装，可导入 SPSS、Stata、SAS 格式的数据
+- **Hmisc** 包，可导入 SPSS、Stata、SAS 格式的数据
 - **openxlsx** 包，可导入 Excel 格式数据
 - [Hadley](http://hadley.nz/) 开发的 R 包，如 **haven** 等，可导入各类数据
 - **sas7bdat** 包，可导入 Sas 格式数据
@@ -163,15 +163,27 @@ read.dta13("xxx.dta", convert.factors = TRUE, ...)
 **readr** 包提供诸多读取文本数据的函数，比 R 自带的函数一般而言速度更快，且直接转换为 tibble，而不是 data frame。其中主要的几个分别如下：
 
 - 读取含有分隔符文件：
-    - `read_delim()`：可以指定分隔符）
-    - `read_csv()`：读取逗号分隔的数据文件）
-    - `read_tsv()` ：读取制表符分割数据的文件）
+    - `read_delim(file, delim, ...)` （可以指定分隔符）
+    - `read_csv(file, col_names = , ...)` （读取逗号分隔的数据文件）
+    - `read_tsv(file, col_names = , ...)` （读取制表符分割数据的文件）
+    - `read_table(file, col_names = , ...)` （读取空格分隔数据的文件）
+  
+有关这些函数参数说明请点击[这里](http://127.0.0.1:22958/library/readr/html/read_delim.html)以及[此处](http://127.0.0.1:22958/library/readr/html/read_table.html)。
+
 - 读取固定宽度文件：
-    - `read_fwf()`
-    - `read_table()`
+    - `read_fwf(file, col_positions, ...)`
+
+有关此函数参数说明请点击[这里](http://127.0.0.1:22958/library/readr/html/read_fwf.html)    
+    
 - 读取日志文件：
-    - `read_log()`
-- `read_lines()`：逐行读取数据
+    - `read_log(file, col_names = , ...)`
+    
+有关此函数参数说明请点击[这里](http://127.0.0.1:22958/library/readr/html/read_log.html)
+    
+- 从文件中逐行读取数据
+    - `read_lines(ile, skip = , ...)` 
+    
+有关此函数参数说明请点击[这里](http://127.0.0.1:22958/library/readr/html/read_lines.html)
 
 #### **readxl** 包中的函数
 
@@ -192,9 +204,9 @@ read_excel("xxx.xlsx", sheet = )
 
 #### **haven** 包中的函数
 
-**haven** 包提供了读取 SPSS, Sas 和 Stata 统计软件格式数据的函数，分别如下：
+**haven** 包提供了读取 SPSS, SAS 和 Stata 统计软件格式数据的函数，分别如下：
 
-- `read_sas("xxx.sas")`：读取 Sas 数据
+- `read_sas("xxx.sas")`：读取 SAS 数据
 - `read_sav("xxx.sav")`：读取 SPSS 数据
 - `read_dta("xxx.dta")`：读取 Stata 数据
 
