@@ -163,10 +163,10 @@ read.dta13("xxx.dta", convert.factors = TRUE, ...)
 **readr** 包提供诸多读取文本数据的函数，比 R 自带的函数一般而言速度更快，且直接转换为 tibble，而不是 data frame。其中主要的几个分别如下：
 
 - 读取含有分隔符文件：
-    - `read_delim(file, delim, ...)` （可以指定分隔符）
-    - `read_csv(file, col_names = , ...)` （读取逗号分隔的数据文件）
-    - `read_tsv(file, col_names = , ...)` （读取制表符分割数据的文件）
-    - `read_table(file, col_names = , ...)` （读取空格分隔数据的文件）
+    - `read_delim(file, delim, ...)` ：可以指定分隔符的数据文件
+    - `read_csv(file, col_names = , ...)` ：读取逗号分隔的数据文件
+    - `read_tsv(file, col_names = , ...)` ：读取制表符分割的数据文件
+    - `read_table(file, col_names = , ...)` ：读取空格分隔的数据文件
   
 有关这些函数参数说明请点击[这里](http://127.0.0.1:22958/library/readr/html/read_delim.html)以及[此处](http://127.0.0.1:22958/library/readr/html/read_table.html)。
 
