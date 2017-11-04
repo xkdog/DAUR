@@ -9,7 +9,7 @@ R 很少作为一个数据输入软件，而只作为一个数据分析软件。
 - **Hmisc** 包，可导入 SPSS、Stata、SAS 格式的数据
 - **openxlsx** 包，可导入 Excel 格式数据
 - [Hadley](http://hadley.nz/) 开发的 R 包，如 **haven** 等，可导入各类数据
-- **sas7bdat** 包，可导入 Sas 格式数据
+- **sas7bdat** 包，可导入 SAS 格式数据
 - **memisc** 包，可导入 SPSS、Stata 格式数据
 
 这里择要进行介绍。以下假定读者已安装各相关 R 包。
@@ -48,7 +48,7 @@ data <- edit(data)
 file <- read.table("xxx.txt", header = , sep = "", ...)
 ```
 
-其中，
+其中
 
 - `xxx.txt`表示待读取的文件名
 - `header = TRUE`表示将数据第一行读为变量名（默认选项），`header = FALSE`表示不将数据第一行读为变量名
@@ -163,10 +163,10 @@ read.dta13("xxx.dta", convert.factors = TRUE, ...)
 **readr** 包提供诸多读取文本数据的函数，比 R 自带的函数一般而言速度更快，且直接转换为 tibble，而不是 data frame。其中主要的几个分别如下：
 
 - 读取含有分隔符文件：
-    - `read_delim(file, delim, ...)` ：可以指定分隔符的数据文件
-    - `read_csv(file, col_names = , ...)` ：读取逗号分隔的数据文件
-    - `read_tsv(file, col_names = , ...)` ：读取制表符分割的数据文件
-    - `read_table(file, col_names = , ...)` ：读取空格分隔的数据文件
+  - `read_delim(file, delim, ...)` ：可以指定分隔符的数据文件
+  - `read_csv(file, col_names = , ...)` ：读取逗号分隔的数据文件
+  - `read_tsv(file, col_names = , ...)` ：读取制表符分割的数据文件
+  - `read_table(file, col_names = , ...)` ：读取空格分隔的数据文件
   
 有关这些函数参数说明请点击[这里](http://127.0.0.1:22958/library/readr/html/read_delim.html)以及[此处](http://127.0.0.1:22958/library/readr/html/read_table.html)。
 
