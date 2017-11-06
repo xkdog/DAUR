@@ -35,7 +35,7 @@ help(package = "base")
 `==`         |  严格等于
 `!=`         |  不等于
 `!x`         |  非`x`
-`x | y`      |  `x`或`y`
+`x \| y`     | `x`或`y`
 `x & y`      |  `x`和`y`
 `isTRUE(X)`  |  测试`x`是否为TRUE
      
