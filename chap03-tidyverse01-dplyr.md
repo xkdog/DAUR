@@ -246,7 +246,7 @@ mtcars_subset1 <- select(mtcars, wt, mpg)
 head(mtcars_subset1, 2)
 ```
 
-此时，`mtcars_subset`数据就只剩下`mpg`和`wt`两个变量。
+此时，`mtcars_subset1`数据就只剩下`mpg`和`wt`两个变量。
 
 与许多其他统计软件类似，`select()`也允许通过减号`-`来剔除变量。
 
@@ -381,7 +381,7 @@ all_equal(x, y)
 
 排序是最常见的数据操纵方式之一。**dplyr** 中可使用 `arrange()`实现这一功能，该函数及相关函数比 R 自带的`sort()`、`order()`、`rank()`等涉及排序的函数更为直观且不易出错。
 
-`arrage()`函数的用法如下：
+`arrange()`函数的用法如下：
 
 ```r
 arrange(dataframe, var1, var2, ...)
