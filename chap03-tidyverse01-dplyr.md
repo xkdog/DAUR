@@ -131,7 +131,8 @@ BMI       | 肥胖程度
 
 ```r
 mutate(dataframe,
-       type = case_when(condition_A ~ "A",
+       type = case_when(
+       condition_A ~ "A",
        condition_B ~ "B",
        condition_C ~ "C",
        ...
