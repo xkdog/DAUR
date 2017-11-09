@@ -117,46 +117,79 @@ women_bmi <- mutate(
 )
 ```
 
-按世界卫生组织（WHO）的分类，成人 BMI 指数与肥胖程度之间的分类如下：
-
-BMI | 肥胖程度
-----|---------
-< 18.5 | 偏瘦（Underweight）
+BMI       | 肥胖程度
+----------|---------
+ < 18.5   | 偏瘦（Underweight）
 18.5~24.9 | 正常（Normal）
 25.0~29.9 | 偏胖（Overweight）
-`>=` 30.0   | 肥胖（Obesity）
+`>=` 30.0 | 肥胖（Obesity）
 
 
-依据此表，对前述 BMI 值进行分类，该变量命名为`class`。
+依据此表，对上前述 BMI 值进行分类，该变量命名为`bmi_class`。
 
-此时使用 R 的自有函数`within()`来修改数据框可能更为方便。
+此时可利用 **dlpyr** 包中的`case_when()`函数，此函数用于生成多重`if else`条件下的赋值，即将某一变量按特定取值条件划分为不同类型（因子），具体用法如下
 
-```{r}
-women_bmi <- within(women_bmi, {
-  class = NA
-  class[bmi < 18] = "Underweight"
-  class[bmi >= 18 & bmi <= 24.9] = "Normal"
-  class[bmi >= 25 & bmi <= 29.9] =  "Overweight"
-  class[bmi >= 30] =  "Obesity"
-})
-head(women_bmi)
+```r
+mutate(dataframe,
+       type = case_when(condition_A ~ "A",
+       condition_B ~ "B",
+       condition_C ~ "C",
+       ...
+         )
+       )
 ```
 
-显然所有`class`的取值均为正常（normal）。基于均值计算的 BMI 指数通常并无实际意义，只有对独立的个体进行体重是否超标的判定才有实际价值。此例只作为对变量的操纵示例。
+其中
 
-结合 R 自有函数`cut()`，仍可在`mutate()`框架下完成同样的工作。
+- `dataframe` 表示待操纵的数据框
+- `type` 表示新生成的变量名
+- `condition_A`、`condition_B`、`condition_C`等表示不同的取值条件，这些条件应当返回为逻辑型向量
+- `A`、`B`、`C`等表示对`type`变量的赋值
+- `...`表示其他条件
+
+具体效果看下面的代码。
 
 ```{r}
-women_bmi2 <- mutate(
+women_bmi01 <- mutate(
   women_bmi,
-  class = cut(
-    bmi,
-    breaks = c(0, 18.5, 25, 30, 100),
-    labels = c("Underweight", "Normal", "Overweight", "Obesity"),
-    right  = FALSE
+  bmi_class = case_when(
+    bmi < 18.5 ~ "Underweight",
+    between(bmi, 18.5, 22.9) ~ "Normal",
+    between(bmi, 23.0, 29.9) ~ "Overweight",
+    bmi >= 30 ~ "Obesity"
+    )
   )
-)
-head(women_bmi2)
+```
+
+注意这里利用了 **dplyr** 包中的`between()`函数，`between(x, a, b)`的含义即在于判定向量`x`中的元素取值是否在闭区间[a,b]内，`a`和`b`表示两个实数。
+
+也可使用R的自有函数`within()`来修改数据框。
+
+```{r}
+women_bmi02 <- within(women_bmi,
+                    {
+                    bmi_class = NA
+                    bmi_class[bmi < 18.5] = "Underweight"
+                    bmi_class[bmi >= 18.5 & bmi <= 24.9] = "Normal"
+                    bmi_class[bmi >= 25 & bmi <= 29.9] =  "Overweight"
+                    bmi_class[bmi >= 30] =  "Obesity"
+                    })
+head(women_bmi02)
+```
+
+显然所有`class`的取值均为正常（normal）。基于均值计算的BMI指数通常并无实际意义，只有对独立的个体进行体重是否超标的判定才有实际价值。此例只作为对变量的操纵示例。
+
+结合R自有函数`cut()`，仍可在`mutate()`框架下完成同样的工作。
+
+```{r}
+women_bmi03 <- mutate(
+  women_bmi,
+  bmi_class = cut(bmi,
+  breaks = c(0, 18.5, 25, 30, 100),
+  labels = c("Underweight", "Normal", "Overweight", "Obesity"),
+  right = FALSE)
+  )
+head(women_bmi03)
 ```
 
 两种方式的效果完全相同。使用`cut()`的便利之处在于可以将这一命令嵌套于整体代码中，使代码变得更为紧凑可读。下面将前述命令整合成一个代码块，一步到位实现数据处理要求。
@@ -167,18 +200,17 @@ women_bmi <- mutate(
   height_cm = round(height * 2.54),
   weight_kg = round(weight * 0.45),
   bmi = round((weight_kg / (height_cm / 100) ^ 2), 1),
-  class = cut(
+  bmi_class = cut(
     bmi,
     breaks = c(0, 18.5, 25, 30, 100),
     labels = c("Underweight", "Normal", "Overweight", "Obesity"),
     right = FALSE
+    )
   )
-)
 women_bmi
 ```
 
 `cut()`函数可将某一连续型变量转换为因子（即转化为分类变量，也即完成分组），其用法如下：
-
 ```r
 cut(
   var,
@@ -187,7 +219,7 @@ cut(
   include.lowest = FALSE,
   right = TRUE,
   ...
-)
+  )
 ```
 
 其中，
@@ -196,20 +228,20 @@ cut(
 - `breaks` 用于设定分界点
 - `labels` 用于设定分组标签
 - `include.lowest` 用于设定最小值是否包含在分组中，默认为否
-- `right` 用于设定分组的右侧端点值是否包含在本组之内
+- `right` 用于设定分组的右侧端点值是否包含在本组之内。
 
-特别要注意的是`breaks =`的设定与`right =`的设定匹配。例如，若要分4组，则需要有5个分界点。若设定：
+特定要注意的是`breaks =`的设定与`right =`的设定匹配。例如，若要分4组，则需要有5个分界点。若设定：
 
 ```r
 breaks = c(1, 4, 20, 60, 100)
 ```
-
 且选择默认设定`right  = TRUE`，则分组如下：
 
 - 第1组：(1, 4]，1不在分组之内，因为默认`include.lowest = FALSE`
 - 第2组：(4, 20]
 - 第3组：(20, 60]
 - 第4组：(60, 100]
+
 
 若选择设定`right  = FALSE`，则分组如下：
 
@@ -219,8 +251,6 @@ breaks = c(1, 4, 20, 60, 100)
 - 第4组：[60, 100)
 
 分析者可按实际需求设定分组是否包含右侧端点值。最小值和最大值的设定可视实际变量的取值范围而自行设定，通常可小于待分组变量的实际最小值或大于其实际最大值，以使所有取值都包含在某一分组之中。
-
-
 
 
 ### 选择变量：`select()`
