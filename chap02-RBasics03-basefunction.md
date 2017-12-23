@@ -101,7 +101,7 @@ help(package = "base")
 函数                                 |  功能
 -------------------------------------|-----------------------------------------------------
 `length(x)`                          |  求`x`的长度，如`length(c(1, 2, 3, 4))`返回值为`4`
-`seq(from, to, by)`                  |  以`by`为步长生成从`from`到`to`的等差数列，如`seq(1, 10, 2)`返回值为`1 3 5 7` 
+`seq(from, to, by)`                  |  以`by`为步长生成从`from`到`to`的等差数列，如`seq(1, 10, 2)`返回值为`1 3 5 7 9` 
 `rep(x, times = , each = , len = )`  |  重复`x`，`times`控制向量整体的重复次数，`each`控制每个元素的重复次数，`len`控制输出长度
 `gl(n, k, labels = c() )`            |  产生因子向量，其中`n`表示因子的水平数，`k`表示每一水平下的取值次数，`labels = c()`用于输入水平取值的标签
 `cut(x, n)`                          |  将连续型向量`x`分割为有着 $n$ 个水平的因子
@@ -354,7 +354,7 @@ Weibull 分布                                  |  `wilbull`
 `getwd()`                            |  显示当前的工作目录
 `setwd()`                            |  设定当前工作路径
 `install.packages()`                 |  下载和安装 R 包
-`updata.packages()`                  |  更新已经安装的 R 包
+`update.packages()`                  |  更新已经安装的 R 包
 `load("")`                           |  读取 R 格式数据（`.RData`）
 `library()`                          |  载入已安装的包
 `require()`                          |  将会根据包的存在与否返回`TRUE`或`FALSE`
