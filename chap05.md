@@ -6,6 +6,9 @@
 
 - [PMCMR](https://cran.r-project.org/web/packages/PMCMR/vignettes/PMCMR.pdf) 包
 - [R companion](http://rcompanion.org/handbook/) 书
+- [Multicomparsion Procedure List](https://analyse-it.com/docs/user-guide/comparegroups/multiplecomparisonprocedures)
+
+
 
 
 
