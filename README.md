@@ -10,7 +10,7 @@ This repo was built for my ongoing project of publishing an introductory Chinese
 
 ## 写作风格
 
-只有一条原则：简洁。遵循所谓的奥卡姆剃刀原则：如无必要，务增实体。翻译一下：不要多写一个字。
+只有一条原则：简洁。遵循所谓的奥卡姆剃刀原则：如无必要，勿增实体。翻译一下：不要多写一个字。
 
 比如：
 
