@@ -67,6 +67,12 @@ This repo was built for my ongoing project of publishing an introductory Chinese
     - 方差分析
     - 广义线性模型
 
+
+分工：
+
+- 姜鹤：分层线性模型
+
+
 吕小康
 
 南开大学周恩来政府管理学院
