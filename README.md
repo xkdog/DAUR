@@ -70,7 +70,6 @@ This repo was built for my ongoing project of publishing an introductory Chinese
 
 分工：
 
-分工：
 
 | Name1 | Name2 | Task |
 |:---:|:---:|:---:|
