@@ -74,7 +74,7 @@ This repo was built for my ongoing project of publishing an introductory Chinese
 | Name1 | Name2 | Task |
 |:---:|:---:|:---:|
 |姜鹤| | 分层线性模型|
-|荣杨| | 结构方程|
+|荣杨|李莹| 结构方程|
 |卢洁| | 工具变量回归|
 |王磊| | 调节效应与中介效应|
 |臧慧琳|汪海宝| 断点回归|
