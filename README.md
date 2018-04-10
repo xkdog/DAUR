@@ -78,7 +78,7 @@ This repo was built for my ongoing project of publishing an introductory Chinese
 |卢洁|曾云 | 工具变量回归|
 |王磊| | 调节效应与中介效应|
 |臧慧琳|汪海宝| 断点回归|
-|刘爽| | 广义线性模型 |
+|刘爽|张甜甜| 广义线性模型 |
 |崔虞馨|丁奎元 | 双重差分回归|
 |赵莹|刘兆萍 | 因子分析|
 
