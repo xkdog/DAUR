@@ -71,9 +71,10 @@ This repo was built for my ongoing project of publishing an introductory Chinese
 分工：
 
 
-| Name1 | Name2 |
-|:---:|:---:|
-|唐诗文|张涵| 
+| Name1 | id | department 
+|:---:|:---:|:---:|
+|唐诗文| | | 
+|张涵| | |
 
 吕小康
 
