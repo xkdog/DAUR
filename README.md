@@ -75,7 +75,7 @@ This repo was built for my ongoing project of publishing an introductory Chinese
 |:---:|:---:|:---:|
 |唐诗文|2120182142|社会学 | 
 |张涵| | |
-|杨旋| | |
+|杨旋|2120182158 | 应用心理学|
 
 吕小康
 
