@@ -83,6 +83,8 @@ This repo was built for my ongoing project of publishing an introductory Chinese
 |王姣|2120182156| 应用心理学|
 |王晖|2120182162|应用心理学|
 
+|洪斌|2120182159|应用心理学|
+
 吕小康
 
 南开大学周恩来政府管理学院
