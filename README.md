@@ -71,17 +71,9 @@ This repo was built for my ongoing project of publishing an introductory Chinese
 分工：
 
 
-| Name1 | Name2 | Task |
-|:---:|:---:|:---:|
-|唐诗文|张涵| 分层线性模型|
-|荣杨|李莹| 结构方程|
-|卢洁|曾云 | 工具变量回归|
-|王磊|鸿迪孜 | 调节效应与中介效应|
-|臧慧琳|汪海宝| 断点回归|
-|刘爽|张甜甜| 广义线性模型 |
-|崔虞馨|丁奎元 | 双重差分回归|
-|赵莹|刘兆萍 | 因子分析|
-
+| Name1 | Name2 |
+|:---:|:---:|
+|唐诗文|张涵| 
 
 吕小康
 
