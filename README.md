@@ -79,6 +79,7 @@ This repo was built for my ongoing project of publishing an introductory Chinese
 |罗寓|2120182160 | 应用心理学|
 |丛琪珈|2120182155| 应用心理学|
 |曹雪|2120182154| 应用心理学|
+|倪楠|2120182161| 应用心理学|
 
 吕小康
 
