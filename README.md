@@ -76,7 +76,7 @@ This repo was built for my ongoing project of publishing an introductory Chinese
 |唐诗文|2120182142|社会学 | chap01-intro01-R
 |张涵|2120182145| 社会学 | chap02-RBasics01-datastructure.md
 |杨旋|2120182158 | 应用心理学|
-|罗寓|2120182160 | 应用心理学|
+|罗寓|2120182160 | 应用心理学| chap03-tidyverse01-dplyr
 |丛琪珈|2120182155| 应用心理学|chap01-intro04-tidyverse
 |曹雪|2120182154| 应用心理学| chap03-tidyverse03-stringr
 |倪楠|2120182161| 应用心理学|
