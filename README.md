@@ -79,7 +79,7 @@ This repo was built for my ongoing project of publishing an introductory Chinese
 |罗寓|2120182160 | 应用心理学| chap03-tidyverse01-dplyr
 |丛琪珈|2120182155| 应用心理学|chap01-intro04-tidyverse
 |曹雪|2120182154| 应用心理学| chap03-tidyverse03-stringr
-|倪楠|2120182161| 应用心理学|
+|倪楠|2120182161| 应用心理学| chap01-intro02-RStudio
 |王姣|2120182156| 应用心理学| chap02-RBasics02-data_import
 |王晖|2120182162|应用心理学|
 |张卉|2120182163|应用心理学|
