@@ -82,7 +82,7 @@ This repo was built for my ongoing project of publishing an introductory Chinese
 |倪楠|2120182161| 应用心理学| chap01-intro02-RStudio
 |王姣|2120182156| 应用心理学| chap02-RBasics02-data_import
 |王晖|2120182162|应用心理学|
-|张卉|2120182163|应用心理学|
+|张卉|2120182163|应用心理学| chap03-tidyverse04-lubridate.md
 |王晓文|2120182157|应用心理学| chap02-RBasics03-base_function
 |洪斌|2120182159|应用心理学|
 
