@@ -84,7 +84,7 @@ This repo was built for my ongoing project of publishing an introductory Chinese
 |王晖|2120182162|应用心理学|
 |张卉|2120182163|应用心理学|
 |王晓文|2120182157|应用心理学| chap02-RBasics03-base_function
-|洪斌|2120182159|应用心理学|
+|洪斌|2120182159|应用心理学| chap03-tidyverse02-tidyr
 
 吕小康
 
