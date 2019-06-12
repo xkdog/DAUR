@@ -1,9 +1,3 @@
----
-title: "chap01-intro01-R"
-author: "Tang Shiwen"
-date: "May 27, 2019"
----
-
 # 软件准备
 
 本节主要介绍 R 与 RStudio 的基础知识、安装方式与相关资源。这里所有的示例均以 Windows 10 系统下的 R 3.6.0 版本为例进行，适用于任何 R 3.0.0 以上版本。RStudio 的说明适用于 RStudio 1.0 以上版本。
