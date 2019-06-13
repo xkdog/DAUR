@@ -15,7 +15,7 @@
 
 #### 文件名
 
-文件名应能体现文件的实质内容，只使用数字、英文字母、中划线`-`和下划线`_`。尽量避免文件名中的英文字母大小写混用，宜只使用小写，并建议使用`_`或`-`连接文件名中的不同英文，如`nankai_psy_2017`。
+文件名应能体现文件的实质内容，只使用数字、英文字母、中划线`-`和下划线`_`。尽量避免文件名中的英文字母大小写混用，宜只使用小写，并建议使用`_`或`-`连接文件名中的不同英文，如`nankai_psy_2018`。
 
 若多个文件存在特定顺序，应以数字作为前缀。如果有超过10个文件，对于个位数的前缀要在前面添补一个0。例如：
 
@@ -233,18 +233,16 @@ tidyverse_update()
 
 ```r
 The following packages are out of date:
- * dplyr  (0.5.0 -> 0.7.0)
- * purrr  (0.2.2 -> 0.2.2.2)
- * tibble (1.2 -> 1.3.3)
-Update now?
 
-1: Yes
-2: No
+* dplyr  (0.8.0.1 -> 0.8.1)
+* reprex (0.2.1 -> 0.3.0)
+* rvest  (0.3.3 -> 0.3.4)
 
-Selection: 
+Start a clean R session then run:
+install.packages(c("dplyr", "reprex", "rvest"))
 ```
 
-在`Selection`后键入`1`即可更新相关包。
+打开新的R执行命令`install.packages(c("dplyr", "reprex", "rvest"))`，即可更新相关包。
 
 开始数据分析时，不论是否用到，可先加载 **tidyverse** 系列包，以便后续工作。此后将对此系列包中的重点 R 包展开详细介绍。
 
