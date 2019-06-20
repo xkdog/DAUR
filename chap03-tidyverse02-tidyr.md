@@ -1,9 +1,13 @@
 
 ## **tidyr** 简介
 
-tidyr主要提供了一个类似于EXCEL中数据透视表的功能
-tidyr包主要涉及：
+**tidyr**主要提供了一个类似于EXCEL中数据透视表的功能
+**tidyr**包主要涉及：
+
+
 1)缺失值的简单补齐 
+
+
 2)长形表变宽形表与宽形表变长形表
 
 - `gather()`：把宽度较大的数据转换成一个更长的形式，它类比于从reshape2包中融合函数的功能
@@ -25,7 +29,7 @@ library(tidyr)
 当然，也可通过`library(tidyverse)`调用此包。
 
 ## gather()
-gather函数类似于Excel中的数据透视的功能，能把一个变量名含有变量的二维表转换成一个规范的二维表，实现宽表转长表。
+`gather()`函数类似于Excel中的数据透视的功能，能把一个变量名含有变量的二维表转换成一个规范的二维表，实现宽表转长表。
 
 ```r
 gather(data, key = "key", value = "value", ..., na.rm = FALSE, convert = FALSE, factor_key = FALSE)
@@ -60,7 +64,7 @@ longdata
 通过以上两个例子，可以看到，`gather()`函数将一个宽数据框转化为了一个长数据框。
 
 ## spread()
-为了满足建模或绘图的要求，往往需要将长形表转换为宽形表，或将宽形表变为长形表，使用spread()函数实现长表转宽表
+为了满足建模或绘图的要求，往往需要将长形表转换为宽形表，或将宽形表变为长形表，使用`spread()`函数实现长表转宽表。
 
 ```r
 spread(data, key, value, fill = NA, convert = FALSE, drop = TRUE)
@@ -93,7 +97,7 @@ spread(stu3_new,test,grade)
 通过以上两个例子，可以看到，`gather()`函数将一个长数据框转化为了一个宽数据框。
 
 ## unite()
-`seperate()`函数的反向操作，多列合并为一列。
+`unite()`函数将多列合并为一列。
 
 ```r
 unite(data, col, ..., sep = "_", remove = TRUE)
