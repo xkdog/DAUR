@@ -1,4 +1,7 @@
 
+## 演示及修改内容：chap02-RBasics03-base_function
+(PS：改动部分较少，只有四处单词拼写错误——第84、89、126、269行，一处命令书写错误——第100行，两处描述修改——第162、201行,有改动的部分在word文档中以红色字体标出)
+
 
 ## R 基础函数
 
@@ -8,7 +11,7 @@ R 内置诸多功能丰富的基础函数，使用这些函数不需要先加载
 
 如需了解更多 R 基础函数，可输入如下命令：
 
-```r
+```{r}
 help(package = "base")
 ```
 
@@ -20,7 +23,7 @@ help(package = "base")
 `-`          |  减/求差（difference）
 `*`          |  乘/求积（product）
 `/`          |  除/求商（quotient）
-`^`或`**`    |  求幂（乘方，power）
+`^`或`**`    |  求幂（乘方，power），如`5 ** 2`的结果为`25`
 `x %% y`     |  求余运算，如`5 %% 2`的结果为`1`
 `x %/% y`    |  整除运算，如`5 %/% 2`的结果为`2`
 
@@ -35,7 +38,7 @@ help(package = "base")
 `==`         |  严格等于
 `!=`         |  不等于
 `!x`         |  非`x`
-`x \| y`     | `x`或`y`
+`x \| y`     | `x`或`y`
 `x & y`      |  `x`和`y`
 `isTRUE(X)`  |  测试`x`是否为TRUE
      
@@ -70,12 +73,12 @@ help(package = "base")
 `sinh(x)`                        |  双曲正弦函数 $\sinh(x)$
 `cosh(x)`                        |  双曲余弦函数 $\cosh(x)$
 `tanh(x)`                        |  双曲正切函数 $\tanh(x)$
-`log(x, base=n)`                 |  对`x`取以 $n$ 为底的对数（logrithemic）
+`log(x, base=n)`                 |  对`x`取以 $n$ 为底的对数（logarithm）
 `log(x)`                         |  对`x`取以自然底数 $\mathrm{e}$ 为底的对数
 `log10(x)`                       |  对`x`取以10为底的对数
 `log2(x)`                        |  对`x`取以2为底的对数
 `log1p(x)`                       |  即 $\log_{\mathrm{e}} (1 + x)$,对 $1 + x$ 取以 $\mathrm{e}$ 为底的对数
-`exp(x)`                         |  指数函数（exponentioal function），即 $\mathrm{e} ^ x$  
+`exp(x)`                         |  指数函数（exponential function），即 $\mathrm{e} ^ x$  
 `expm1(x)`                       |  $\mathrm{e} ^ x - 1$ 
 `integrate(f, lower, upper)`     |  求积分，`f`表示被积函数（integrand），`lower`表示积分下限，`upper`表示积分上限
 `D(fun, "x")`                    |  求导函数，原函数`fun`通常使用`expression()`函数定义或直接输入
@@ -84,9 +87,9 @@ help(package = "base")
 
 ### 统计计算
  
- 函数                                 |  功能
+ 函数                                |  功能
 -------------------------------------|------------------------------------------------------
-`mean(x)`                            |  求均值，如`mean(c(1, 3, 5, 7)`返回值为`4`
+`mean(x)`                            |  求均值，如`mean(c(1, 3, 5, 7))`返回值为`4`
 `median(x)`                          |  求中位数，如`median(c(1, 3, 5, 7))`返回值为`4`
 `range(x)`                           |  求最小值与最大值之差（range 在统计中常翻译为极差或全距，在数学中翻译为值域）
 `IQR(x)`                             |  求`x`的四分位差（interquartile range）
@@ -101,10 +104,10 @@ help(package = "base")
 函数                                 |  功能
 -------------------------------------|-----------------------------------------------------
 `length(x)`                          |  求`x`的长度，如`length(c(1, 2, 3, 4))`返回值为`4`
-`seq(from, to, by)`                  |  以`by`为步长生成从`from`到`to`的等差数列，如`seq(1, 10, 2)`返回值为`1 3 5 7 9` 
+`seq(from, to, by)`                  |  以`by`为步长生成从`from`到`to`的等差数列，如`seq(1, 10, 2)`返回值为`1 3 5 7 9` 
 `rep(x, times = , each = , len = )`  |  重复`x`，`times`控制向量整体的重复次数，`each`控制每个元素的重复次数，`len`控制输出长度
-`gl(n, k, labels = c() )`            |  产生因子向量，其中`n`表示因子的水平数，`k`表示每一水平下的取值次数，`labels = c()`用于输入水平取值的标签
-`cut(x, n)`                          |  将连续型向量`x`分割为有着 $n$ 个水平的因子
+`gl(n, k, labels = c() )`            |  产生因子向量，其中`n`表示因子的水平数，`k`表示每一水平下的取值次数，`labels = c()`用于输入水平取值的标签
+`cut(x, n)`                          |  将连续型向量`x`分割为有着 $n$ 个水平的因子
 `pretty(x, n)`                       |  创建美观分割点。选取 $n + 1$ 个等距分割点，将连续型向量`x`分割为 $n$ 个区间
 `colSums(x)`                         |  求列总和，`x`为数值型矩阵、数组或数据框
 `rowSums(x)`                         |  求行总和，`x`为数值型矩阵、数组或数据框
@@ -112,7 +115,7 @@ help(package = "base")
 `rowMeans(x)`                        |  求行均值，`x`为数值型矩阵、数组或数据框
 `duplicated(x)`                      |  求向量或数据框的重复元素中的下标较小元素，并返回逻辑向量指出哪些元素重复
 `unique(x)`                          |  删除`x`向量、数据框或数组中重复的元素，如`unique(c(1, 2, 2, 4, 5, 4, 6))`返回值为`1 2 4 5 6`
-`table()`                            |  制作频次表（frequency table）或列联表（contigency table）
+`table()`                            |  制作频次表（frequency table）或列联表（contingency table）
 `rev(x)`                             |  对`x`中元素取逆序（reverse order）排列
 `sort(x, decreasing = FALSE)`        |  对向量`x`进行升序排序，若设置`decreasing = TRUE`则进行降序排序
 `order(x)`                           |  将`x`中元素下标按升序排列，如`order(c(20, 4, 13, 9))`返回值为`2 4 3 1`
@@ -150,7 +153,7 @@ mtcars[order(cyl), ]
 
 这里的`order(cyl)`出现在行标的位置，意指让`cyl`（气缸数）最少者排在最前的行，逗号后留空表示所有其他列依前面的排序规则重新排序。
 
-若要对多列取值进行排序，在`order()`中用逗号隔开即可，括号中的先后次序表示将军号的排序顺位。例如
+若要对多列取值进行排序，在`order()`中用逗号隔开即可，按括号中各列的先后次序进行排序。例如
 
 ```{r}
 mtcars[order(cyl, -mpg), ]
@@ -187,7 +190,7 @@ x %in% y
 y %in% x
 ```
 
-`match()`的功能与此类似，但较不易理解。`match(x, y)`可将向量`x`与`y`中相匹配的元素个数进行计数和标记（按`x`中元素的升序），其中的最大数实际给出`x`与`y`中相同元素的个数。试看下例
+`match()`的功能与此类似，但较不易理解。`match(x, y)`返回值为x各元素与y中相匹配的元素在y中的位置信息，没有相匹配的元素则返回NA。试看下例
 
 ```{r}
 x <- c(5, 2, 1, 4, 3)
@@ -257,7 +260,7 @@ R 中概率分布名称的缩写如下
 多项分布（multinomial distribution）          |  `multinom`
 正态分布（normal distribution）               |  `norm`
 几何分布（geometric distribution）            |  `geom`
-超几何分布（hypergeomitric distribution）     |  `hyper`
+超几何分布（hypergeometric distribution）     |  `hyper`
 负二项分布（negative binomial distribution）  |  `nbinom`
 对数正太分布（log normal distribution）       |  `lnorm`
 卡方分布（chi-squared distribution）          |  `chisq`
@@ -373,7 +376,7 @@ Weibull 分布                                  |  `wilbull`
 `file.path()`                        |  拼接目录字符串
 `file.choose()`                      |  返回可选择文件位置的对话框
 `file.copy()`                        |  复制单个文件
-`file.create()`                      |  返回创建的文件的句柄后,状态就是打开状态
+`file.create()`                      |  返回创建的文件的句柄后，状态就是打开状态
 `file.remove()`                      |  删除指定文件
 `file.rename()`                      |  文件或目录的重命名
 `file.exists()`                      |  检查文件或目录是否存在
