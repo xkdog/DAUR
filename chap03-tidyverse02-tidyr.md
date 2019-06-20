@@ -5,13 +5,17 @@ tidyr主要提供了一个类似于EXCEL中数据透视表的功能
 tidyr包主要涉及：
 1)缺失值的简单补齐 
 2)长形表变宽形表与宽形表变长形表
+
 　　- `gather()`：把宽度较大的数据转换成一个更长的形式，它类比于从reshape2包中融合函数的功能
 　　- `spread()`：把长的数据转换成一个更宽的形式，它类比于从reshape2包中铸造函数的功能。
+  
 　　`gather()`相反的是`spread()`，前者将不同的列堆叠起来，后者将同一列分开
 3)列分割与列合并
+
 　　- `separate()`：将一列按分隔符分割为多列
 　　- `unite()`：将多列按指定分隔符合并为一列
 　　- `extract()`：通过正则表达式提取一列并转化为新的列
+  
 以下均通过实例说明各函数的用法。请确保已通过以下命令加载 **dplyr** 包。
 
 ```{r}
@@ -22,9 +26,11 @@ library(tidyr)
 
 ## gather()
 gather函数类似于Excel中的数据透视的功能，能把一个变量名含有变量的二维表转换成一个规范的二维表，实现宽表转长表。
+
 ```r
 gather(data, key = "key", value = "value", ..., na.rm = FALSE, convert = FALSE, factor_key = FALSE)
 ```
+
 其中，
 
 - data：数据类型为数据框
@@ -55,9 +61,11 @@ longdata
 
 ## spread()
 为了满足建模或绘图的要求，往往需要将长形表转换为宽形表，或将宽形表变为长形表，使用spread()函数实现长表转宽表
+
 ```r
 spread(data, key, value, fill = NA, convert = FALSE, drop = TRUE)
 ```
+
 - data：为需要转换的长形表
 - key：需要将变量值拓展为字段的变量
 - value：需要分散的值
@@ -76,19 +84,21 @@ class2<-c(NA,NA,"D","E","C","A",NA,NA,NA,NA)
 class3<-c("B","C",NA,NA,NA,NA,"C","C",NA,NA)
 class4<-c(NA,NA,"A","C",NA,NA,"A","A",NA,NA)
 class5<-c(NA,NA,NA,NA,"B","A",NA,NA,"A","C")
-stu3<-data.frame(name,test,class1,class2,class3,class4,class5) #总共5门课，每个学生选两门，列出期中、期末成绩。显然，原表是不整洁的数据，表头中含有变量（class1-5），所以先用gather函数。注意，这里面有很多缺失值，就可以用到上面所讲的na.rm=TRUE参数，自动去除有缺失值的记录（一条记录就是一行）
+stu3<-data.frame(name,test,class1,class2,class3,class4,class5)
 gather(stu3, class, grade, class1：class5, na.rm = TRUE)
-gather(stu3, class, grade, class1：class5) #不写 na.rm = TRUE的话，结果是这样
+gather(stu3, class, grade, class1：class5)
 stu3_new<-gather(stu3, class, grade, class1：class5, na.rm = TRUE)
-spread(stu3_new,test,grade) #用spread函数将test列分来成midterm和final两列，这两列的值是选的两门课的成绩。
+spread(stu3_new,test,grade)
 ```
 通过以上两个例子，可以看到，`gather()`函数将一个长数据框转化为了一个宽数据框。
 
 ## unite()
 `seperate()`函数的反向操作，多列合并为一列。
+
 ```r
 unite(data, col, ..., sep = "_", remove = TRUE)
 ```
+
 - data：为数据框
 - col：被组合的新列名称
 - ...：指定哪些列需要被组合
@@ -108,9 +118,11 @@ mtcars %>% unite_("vs_am", c("vs","am"))
 
 ## separate()
 `separate()`负责分割数据，可将一列拆分为多列，把一个变量中就包含两个变量的数据分来，一般用于日志数据或日期时间型数据的拆分.
+
 ```r
 separate(data, col, into, sep = "[^[：alnum：]]+", remove =TRUE, convert = FALSE, extra = "warn", fill = "warn", ...)
 ```
+
 - data：要处理的数据框；
 - col：需要被拆分的列；
 - into：新建的列名，为字符串向量；
@@ -123,10 +135,10 @@ separate(data, col, into, sep = "[^[：alnum：]]+", remove =TRUE, convert = FAL
 widesep <- separate(wideunite, information,c("person","grade","score"), sep = "-")
 widesep
 ```
+
 可见`separate()`函数和`unite()`函数的功能相反
 
 ```{r}
-library(tidyr)
 df <- data.frame(x = c(NA, "a.b", "a.d","b.c"))
 df
 df %>% separate(x, c("A", "B"))
@@ -139,11 +151,14 @@ df %>% separate(x, c("key", "value"), sep = "：", extra = "merge")
 ```
 
 ## extract()
+
 `extract()`负责提取一列并转化为新列。给定用来一个确定组的正则表达式，`extract()`将每个组转换为新列。如果组不匹配，或组的值输入为NA，则输出将为NA。
+
 ```
 extract(data, col, into, regex = "([[：alnum：]]+)", remove = TRUE,
   convert = FALSE, ...)
 ```
+
 - data：数据框
 - col：列的名称或位置。
 - into：新变量名称
