@@ -14,13 +14,14 @@
 - `spread()`：把长的数据转换成一个更宽的形式，它类比于从reshape2包中铸造函数的功能
   
 `gather()`相反的是`spread()`，前者将不同的列堆叠起来，后者将同一列分开。
+
 3)列分割与列合并
 
 - `separate()`：将一列按分隔符分割为多列
 - `unite()`：将多列按指定分隔符合并为一列
 - `extract()`：通过正则表达式提取一列并转化为新的列
   
-以下均通过实例说明各函数的用法。请确保已通过以下命令加载 **dplyr** 包。
+以下均通过实例说明各函数的用法。请确保已通过以下命令加载 **tidyr** 包。
 
 ```{r}
 library(tidyr)
@@ -177,5 +178,105 @@ df
 df %>% extract(x, "A")
 df %>% extract(x, c("A", "B"), "([[：alnum：]]+)-([[：alnum：]]+)")
 df %>% extract(x, c("A", "B"), "([a-d]+)-([a-d]+)")
+```
+
+## pivot_longer() & pivot_wider()
+
+`pivot_longer()` 类似 `gather()`, 将宽格式数据转化为长格式数据;
+`pivot_wider()` 类似 `spread()` , 将长格式转化为宽格式; 但二者都有更强大的功能, 具体见下文.
+
+### 常用参数介绍
+
+```r
+pivot_longer(data, cols, names_to = "name", values_to = "value", names_prefix = NULL, names_sep = NULL, names_pattern = NULL, names_ptypes = list(), ...)
+```
+- data: 要处理的数据框;
+
+- cols: 是选中要转置的列，可以指定哪些列聚到同一列中;
+
+- names_to: 转换成新列的名称,可以是字符或向量(生成多列时用);
+
+- values_to: 指定要从存储在单元格值中的数据创建的列的名称的字符串;
+
+- names_prefix: 用于从每个列名的开头删除匹配文本的字符;
+
+- names_sep/names_pattern: 如果 names_to 包含多个值，这些参数控制列名如何被分解;
+
+- names_ptypes: 改变新列变量类型.
+
+```r
+pivot_wider(data, names_from = name, values_from = value, names_prefix = "", names_sep = "_", ...)
+```
+
+- data: 要处理的数据框;
+
+- names_frome: 要获取输出列的名称的列;
+
+- values_from: 要获取单元格值的列;
+
+- names_prefix: 添加到每个变量名开头的字符串.当 names_from 是一个数值向量时需添加；
+
+- names_sep: 如果 names_from包含多个变量, 这将用于将它们的值连接到一个字符串中,作为列名使用.
+
+#### 转化长宽格式一般用法
+
+```r
+set.seed(123)
+id <- rep(LETTERS[1:10], 10)
+year <- rep(seq(1991, 2000), each = 10)
+score <- round(runif(100, 0.6, 1) * 10, 2)
+salary <- round(runif(100, 5, 15) * 1000, 0)
+time <- round(runif(100, 0.1, 0.6) * 100, 1)
+dataexa <- data.frame(id, year, score, salary, time) %>% arrange(id)
+```
+
+```r
+dataexa_long <- pivot_longer(dataexa, score:time, names_to = "variable", values_to = "value")
+dataexa_wide <- pivot_wider(dataexa, names_from = year, values_from = score:time)
+```
+
+#### 同 gather() & spread() 的联系与区别
+
+#### pivot_wider()
+
+```r
+pivot_wider(dataexa_long, names_from = variable, values_from = value)
+spread(dataexa_long, key = variable, value = value)
+# 相同结果
+
+pivot_wider(dataexa_long, names_from = c(variable, year), values_from = value, names_sep = "-")
+# 多列取变量无法用 spread() 完成
+
+pivot_wider(dataexa, names_from = year, values_from = score:time)
+# 多列取值无法用 spread() 完成
+
+pivot_wider(dataexa, names_from = year, values_from = score)
+spread(dataexa, year, score)
+# 相同结果
+
+pivot_wider(dataexa, names_from = year, values_from = score, names_prefix = "year_")
+# 变量开头不用数字, 所以添加 “year_", 无法用 spread() 完成
+```
+
+#### pivot_longer()
+
+```r
+pivot_longer(dataexa, score:time, names_to = "variable", values_to = "value")
+gather(dataexa, variable, value, score:time)
+# 相同结果
+
+pivot_longer(dataexa_wide, score_1991:time_2000, names_to = c("variable", "year"), names_sep = "_") 
+# gather() 无法完成，其只能将多列变量转化为一列
+
+pivot_longer(dataexa_wide, score_1991:time_2000, names_to = c("variable", "year"), names_pattern = "(.+)_(.+)") 
+# 和上一个结果相同
+
+pivot_longer(dataexa_wide, score_1991:time_2000, names_to = c("variable", "year"), names_sep = "_", names_ptypes = list(year = integer()))
+# 将 year 转为数值型, gather() 无法完成
+
+dataexa_wide %>% 
+  select(id, starts_with("score")) %>%
+  pivot_longer(score_1991:score_2000, names_to = "year", values_to = "score", names_prefix = "score_", names_ptypes = list(year = integer()))
+  # 将 year 变量下冗余描述 "score_" 删除, gather() 无法完成
 ```
 
