@@ -68,23 +68,13 @@ This repo was built for my ongoing project of publishing an introductory Chinese
     - 广义线性模型
 
 
-2019 学员名单：
+20   学员名单：
 
+以下为示例
 
 | name | id | department | 负责章节 
 |:---:|:---:|:---:|:---:|
 |唐诗文|2120182142|社会学 | chap01-intro01-R
-|张涵|2120182145| 社会学 | chap02-RBasics01-datastructure.md
-|杨旋|2120182158 | 应用心理学| chap01-intro03-RMarkdown
-|罗寓|2120182160 | 应用心理学| chap03-tidyverse01-dplyr
-|丛琪珈|2120182155| 应用心理学|chap01-intro04-tidyverse
-|曹雪|2120182154| 应用心理学| chap03-tidyverse03-stringr
-|倪楠|2120182161| 应用心理学| chap01-intro02-RStudio
-|王姣|2120182156| 应用心理学| chap02-RBasics02-data_import
-|王晖|2120182162|应用心理学| chap03-tidyverse02-tidyr
-|张卉|2120182163|应用心理学| chap-03-tivyverse05-rvest
-|王晓文|2120182157|应用心理学| chap02-RBasics03-base_function
-|洪斌|2120182159|应用心理学| chap03-tidyverse04-lubridate
 
 吕小康
 
