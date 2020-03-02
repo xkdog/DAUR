@@ -529,8 +529,8 @@ tibble 本身即是数据框，但具有普通数据框不具备的特征；但�
 
 ```{r}
 is.data.frame(mtcars_tibble)
-is.tibble(mtcars_tibble)
-is.tibble(mtcars)
+is_tibble(mtcars_tibble)
+is_tibble(mtcars)
 ```
 
 其他关于 tibble 的更详细特征，可参见其说明文档：
