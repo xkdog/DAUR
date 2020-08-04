@@ -53,7 +53,7 @@ mtcars
 
 A data frame with 32 observations on 11 (numeric) variables.
 
- A | B | C 
+  |   |  
 :--|:--|:--  
 [, 1]	| mpg	| Miles/(US) gallon
 [, 2]	| cyl	| Number of cylinders
