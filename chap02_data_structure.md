@@ -1006,7 +1006,7 @@ R 中概率分布名称的缩写如下
 |几何分布（geometric distribution） |	`geom` |
 |超几何分布（hypergeometric distribution） | `hyper` |
 |负二项分布（negative binomial distribution） |	`nbinom` |
-|对数正太分布（log normal distribution） | `lnorm` |
+|对数正态分布（log normal distribution） | `lnorm` |
 |卡方分布（chi-squared distribution） |	`chisq` |
 |F 分布 |	`f` |
 |指数分布（exponential distribution） |	`exp` |
