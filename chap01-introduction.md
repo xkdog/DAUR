@@ -623,6 +623,6 @@ library(tidyverse)
 刘子睿| 经济学 | 2021303| 男
 洪依凡| 管理学 | 2021404| 女
 
-4. 浏览[Bookdown](https://bookdown.org/)官网并阅读自身感兴趣的技术文档，培养对 R 语言的兴趣，了解其多元用途。
+4. 浏览[Bookdown](https://bookdown.org/)官网并阅读相关的技术文档，培养对 R 语言的兴趣，了解其多元用途。
 
 
