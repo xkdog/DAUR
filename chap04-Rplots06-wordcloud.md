@@ -42,7 +42,7 @@ worker(type = "mix", dict = DICTPATH, hmm = HMMPATH, user = USERPATH, idf = IDFP
 ```
 #### 配置词典
 
-- 对于分词结果好坏的关键因素是词典，**jiebaR** 有默认的系统词典，可通过 `show_dictpath()` 函数查看其路径。
+- 决定分词结果好坏的关键因素是词典，**jiebaR** 有默认的系统词典，可通过 `show_dictpath()` 函数查看其路径。
 ```
 show_dictpath()
 ```
