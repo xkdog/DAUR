@@ -1,6 +1,6 @@
 ## ggplot2风格绘图
 
-- 与 base 绘图系统不同, **ggplot2** 基于 Leland Wilkinson 在 《Grammar of Graphics》中所提出的图形语法范式, 形成了自己独特的语法系统与绘图思路, 通过不同图形组件的组合、图层的叠加, 生成最终图形. 在 **ggplot2** 中, 通常包括如下几个图形组件: 
+- 与 base 绘图系统不同, **ggplot2** 基于 Leland Wilkinson 在 《Grammar of Graphics》中所提出的图形语法范式, 形成了自己独特的语法系统与绘图思路, 通过不同图形组件的组合和图层的叠加, 生成最终图形. 在 **ggplot2** 中, 通常包括如下几个图形组件: 
     - 数据 (data)
     - 映射 (mapping)
     - 几何对象 (geom)
