@@ -2,10 +2,6 @@
 
 DAUR: *Data Analysis Using R for Social and Behavioral Sciences*
 
-This repo was built for my ongoing project of publishing an introductory Chinese textbook titled *Data Analysis Using R for Social and Behavioral Sciences*. I'm not familiar with the [Bookdown](https://bookdown.org/) style yet. Once I figure it out, I will put all the materials into a bookdown repo.
-
-本文档中的文档为[本人](http://zfxy.nankai.edu.cn/xk)正在撰写的《数据分析与可视化：基于R》的部分内容。版权归本人所有。
-
 如想参与本系列文档的撰写，请阅读以下内容。
 
 ## 写作风格
@@ -71,4 +67,4 @@ This repo was built for my ongoing project of publishing an introductory Chinese
 
 吕小康
 
-南开大学周恩来政府管理学院
+南开大学社会心理学系
